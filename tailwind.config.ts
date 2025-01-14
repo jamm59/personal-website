@@ -1,3 +1,4 @@
+import { openSync } from "fs";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -8,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        openSans: ["Open Sans", "serif"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
