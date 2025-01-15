@@ -40,7 +40,7 @@ function BottomTaskBar() {
   );
   const currentTime: Date = new Date();
   return (
-    <footer className="select-none bg-[rgba(255,255,255,0.7)] h-[4rem] absolute bottom-0 left-0 right-0 p-4  flex justify-center gap-1 items-center">
+    <footer className="select-none bg-[rgba(255,255,255,0.7)] h-[4rem] absolute bottom-0 left-0 right-0 p-4 flex sm:justify-start justify-center gap-1 items-center">
       {bottomNavBarApplications.map((value: AppType, idx: number) => (
         <button
           key={idx}
@@ -54,12 +54,11 @@ function BottomTaskBar() {
             height={32}
             className="group-active:w-[28px] group-active:h-[28px] transition-all duration-100"
           ></Image>
-          {
-            <div
-              style={{ opacity: 0 }}
-              className="mt-1 left-5 mx-auto bg-[rgba(255,255,255,0.4)]  w-2 h-1 rounded-xl"
-            ></div>
-          }
+
+          <div
+            style={{ opacity: value.isOpen ? 1 : 0 }}
+            className="mt-1 left-5 mx-auto bg-[rgba(255,255,255,0.4)]  w-2 h-1 rounded-xl"
+          ></div>
         </button>
       ))}
       <button className="absolute right-4 text-black p-3 min-w-fit w-[5rem] h-full flex flex-col justify-center items-end text-xs font-mono">

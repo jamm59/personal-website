@@ -1,5 +1,6 @@
 export type AppNameType =
   | "folder"
+  | "taskview"
   | "fileExplorer"
   | "browser"
   | "copilot"

@@ -10,6 +10,13 @@ export const useDataStore = create<StoreDataType>((set) => ({
       iconUrl: "/icons/taskbar/windows.png",
     },
     {
+      name: "taskview",
+      isOpen: false,
+      isOnTaskBar: true,
+      iconUrl: "/icons/taskbar/taskview.png",
+    },
+
+    {
       name: "copilot",
       isOpen: false,
       isOnTaskBar: true,
@@ -37,16 +44,39 @@ export const useDataStore = create<StoreDataType>((set) => ({
   allOpenApps: new Set(),
   addOpenedApp: (appName: AppNameType) =>
     set((state) => {
-      // Create a new Set instance
       const newSet = new Set(state.allOpenApps);
       newSet.add(appName);
-      return { allOpenApps: newSet };
+
+      const updatedApps = state.apps.map((app) =>
+        app.name === appName ? { ...app, isOpen: true } : app
+      );
+
+      return { allOpenApps: newSet, apps: updatedApps };
     }),
   closeAppBasedOnAppName: (appName: AppNameType) =>
     set((state) => {
-      // Create a new Set instance
       const newSet = new Set(state.allOpenApps);
+      const updatedApps = state.apps.map((app) =>
+        app.name === appName ? { ...app, isOpen: false } : app
+      );
       newSet.delete(appName);
-      return { allOpenApps: newSet };
+
+      return { allOpenApps: newSet, apps: updatedApps };
     }),
 }));
+
+export const useFileManager = create((set) => {
+  Desktop: [
+    { name: "Recyle Bin", icon: "", type: "explorer" },
+    {
+      name: "Projects",
+      icon: "",
+      type: "folder",
+      children: [
+        { name: "New folder", icon: "", type: "folder", children: [] },
+      ],
+    },
+    { name: "About Author", icon: "", type: "card" },
+    { name: "Wallpaper", icon: "", type: "settings" },
+  ];
+});
