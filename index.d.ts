@@ -6,18 +6,21 @@ export type AppNameType =
   | "copilot"
   | "microsoftStore"
   | "windowsMenu"
-  | "vsCode";
+  | "vsCode"
+  | string;
 
 export interface AppType {
   name: AppNameType;
   isOpen: boolean;
+  isMinimized: boolean;
   isOnTaskBar: boolean;
   iconUrl: string;
+  children?: AppType[];
 }
 
-export interface StoreDataType {
+export interface FileManagerType {
   apps: AppType[];
-  allOpenApps: Set<AppNameType>;
-  addOpenedApp: (appName: AppNameType) => void;
-  closeAppBasedOnAppName: (appName: AppNameType) => void;
+  handleOpenApp: (appName: AppNameType) => void;
+  handleCloseApp: (appName: AppNameType) => void;
+  handleMinimizeApp: (appName: AppNameType) => void;
 }
