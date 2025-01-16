@@ -1,15 +1,21 @@
 "use client";
 import { useEffect, useState } from "react";
-
+import { useFileMangerStore } from "@/store/data";
+import { FileManagerType, AppType } from "..";
 const WindowsRightClick = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [submenuVisible, setSubmenuVisible] = useState<string | null>(null);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
 
+  const createNewFolder = useFileMangerStore(
+    (state: FileManagerType) => state.handleCreateNewFolder
+  );
+
   interface MenuItemType {
     name: string;
     command?: string;
     icon?: any;
+    callback?: () => void;
     submenu?: MenuItemType[];
   }
 
@@ -142,6 +148,7 @@ const WindowsRightClick = () => {
           {
             name: "Folder",
             command: "",
+            callback: () => createNewFolder(),
             icon: (
               <>
                 <img
@@ -292,6 +299,7 @@ const WindowsRightClick = () => {
   const renderMenuItem = (item: MenuItemType, parentIndex: string) => (
     <div
       key={item.name}
+      onClick={() => (item.callback ? item.callback() : {})}
       className="group flex items-center justify-between gap-x-2 px-2 py-1.5 rounded-lg hover:bg-blue-600 hover:text-white cursor-pointer relative"
       onMouseEnter={() =>
         item.submenu && setSubmenuVisible(`${parentIndex}-${item.name}`)

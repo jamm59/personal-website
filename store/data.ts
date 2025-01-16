@@ -29,7 +29,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       name: "microsoftStore",
       isOpen: false,
       isMinimized: false,
-      isOnTaskBar: false,
+      isOnTaskBar: true,
       iconUrl: "/icons/microsoft-store.webp",
     },
     {
@@ -45,6 +45,27 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       isMinimized: false,
       isOnTaskBar: true,
       iconUrl: "/icons/vscode.png",
+    },
+    {
+      name: "Recycle Bin",
+      isOpen: false,
+      isMinimized: false,
+      isOnTaskBar: false,
+      iconUrl: "/icons/recycle-bin.png",
+    },
+    {
+      name: "About Author",
+      isOpen: false,
+      isMinimized: false,
+      isOnTaskBar: false,
+      iconUrl: "/icons/folder.png",
+    },
+    {
+      name: "New folder",
+      isOpen: false,
+      isMinimized: false,
+      isOnTaskBar: false,
+      iconUrl: "/icons/folder.png",
     },
   ],
   handleOpenApp: (appName: AppNameType) =>
@@ -71,5 +92,18 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
         app.name === appName ? { ...app, isMinimized: !app.isMinimized } : app
       );
       return { apps: updatedApps };
+    }),
+
+  // desktop functions
+  handleCreateNewFolder: () =>
+    set((state) => {
+      const folder: AppType = {
+        name: "New folder",
+        isOpen: false,
+        isMinimized: false,
+        isOnTaskBar: false,
+        iconUrl: "/icons/folder.png",
+      };
+      return { apps: [...state.apps, folder] };
     }),
 }));

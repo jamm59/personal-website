@@ -23,4 +23,5 @@ export interface FileManagerType {
   handleOpenApp: (appName: AppNameType) => void;
   handleCloseApp: (appName: AppNameType) => void;
   handleMinimizeApp: (appName: AppNameType) => void;
+  handleCreateNewFolder: () => void;
 }
