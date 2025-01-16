@@ -71,7 +71,7 @@ export default function FileExplorer() {
                     <span className="mr-auto ml-2">Home</span>
                     <Image
                       alt="close"
-                      src={"/icons/other/close.png"}
+                      src={"/icons/close.png"}
                       width={10}
                       height={10}
                     ></Image>
@@ -80,7 +80,7 @@ export default function FileExplorer() {
                     <Image
                       alt="add"
                       className="rotate-45"
-                      src={"/icons/other/close.png"}
+                      src={"/icons/close.png"}
                       width={10}
                       height={10}
                     ></Image>
@@ -89,19 +89,19 @@ export default function FileExplorer() {
                 <div className="flex gap-7 pr-5 justify-end items-center opacity-70 select-none">
                   <Image
                     alt="minimize"
-                    src={"/icons/other/minimize.png"}
+                    src={"/icons/minimize.png"}
                     width={10}
                     height={10}
                   ></Image>
                   <Image
                     alt="maximize"
-                    src={"/icons/other/maximize.png"}
+                    src={"/icons/maximize.png"}
                     width={10}
                     height={10}
                   ></Image>
                   <Image
                     alt="close"
-                    src={"/icons/other/close.png"}
+                    src={"/icons/close.png"}
                     width={10}
                     height={10}
                   ></Image>

@@ -7,38 +7,38 @@ export const useDataStore = create<StoreDataType>((set) => ({
       name: "windowsMenu",
       isOpen: false,
       isOnTaskBar: true,
-      iconUrl: "/icons/taskbar/windows.png",
+      iconUrl: "/icons/windows.png",
     },
     {
       name: "taskview",
       isOpen: false,
       isOnTaskBar: true,
-      iconUrl: "/icons/taskbar/taskview.png",
+      iconUrl: "/icons/taskview.png",
     },
 
     {
       name: "copilot",
       isOpen: false,
       isOnTaskBar: true,
-      iconUrl: "/icons/taskbar/copilot.png",
+      iconUrl: "/icons/copilot.png",
     },
     {
       name: "microsoftStore",
       isOpen: false,
       isOnTaskBar: false,
-      iconUrl: "/icons/taskbar/microsoft-store.webp",
+      iconUrl: "/icons/microsoft-store.webp",
     },
     {
       name: "fileExplorer",
       isOpen: false,
       isOnTaskBar: true,
-      iconUrl: "/icons/taskbar/file-explorer.png",
+      iconUrl: "/icons/file-explorer.png",
     },
     {
       name: "vsCode",
       isOpen: false,
       isOnTaskBar: true,
-      iconUrl: "/icons/taskbar/vscode.png",
+      iconUrl: "/icons/vscode.png",
     },
   ],
   allOpenApps: new Set(),
@@ -65,9 +65,22 @@ export const useDataStore = create<StoreDataType>((set) => ({
     }),
 }));
 
+interface FileEntrieType {
+  name: string;
+  icon: string;
+  type: string;
+  children?: FileEntrieType[];
+}
+interface FileManagerType {
+  Desktop: FileEntrieType[];
+}
+
 export const useFileManager = create((set) => {
   Desktop: [
     { name: "Recyle Bin", icon: "", type: "explorer" },
+    { name: "About Author", icon: "", type: "card" },
+    { name: "Wallpaper", icon: "", type: "settings" },
+    { name: "Exit", icon: "", type: "exit" },
     {
       name: "Projects",
       icon: "",
@@ -76,7 +89,19 @@ export const useFileManager = create((set) => {
         { name: "New folder", icon: "", type: "folder", children: [] },
       ],
     },
+  ];
+  TaskBar: [
+    { name: "Recyle Bin", icon: "", type: "explorer" },
     { name: "About Author", icon: "", type: "card" },
     { name: "Wallpaper", icon: "", type: "settings" },
+    { name: "Exit", icon: "", type: "exit" },
+    {
+      name: "Projects",
+      icon: "",
+      type: "folder",
+      children: [
+        { name: "New folder", icon: "", type: "folder", children: [] },
+      ],
+    },
   ];
 });
