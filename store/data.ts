@@ -1,71 +1,73 @@
 import { create } from "zustand";
 import { AppNameType, AppType, FileManagerType } from "..";
 
+const template = {
+  name: "None",
+  isDir: false,
+  isOpen: false,
+  isMinimized: false,
+  isOnTaskBar: true,
+  isTempOnTaskBar: false,
+  iconUrl: "/icons/windows.png",
+};
 export const useFileMangerStore = create<FileManagerType>((set) => ({
   apps: [
     {
-      name: "windowsMenu",
-      isOpen: false,
-      isMinimized: false,
-      isOnTaskBar: true,
+      ...template,
+      name: "Start",
       iconUrl: "/icons/windows.png",
     },
     {
-      name: "taskview",
-      isOpen: false,
-      isMinimized: false,
-      isOnTaskBar: true,
+      ...template,
+      name: "Task View",
       iconUrl: "/icons/taskview.png",
     },
-
     {
-      name: "copilot",
-      isOpen: false,
-      isMinimized: false,
-      isOnTaskBar: true,
+      ...template,
+      name: "Copilot",
       iconUrl: "/icons/copilot.png",
     },
     {
-      name: "microsoftStore",
-      isOpen: false,
-      isMinimized: false,
-      isOnTaskBar: true,
+      ...template,
+      name: "Microsoft Store",
       iconUrl: "/icons/microsoft-store.webp",
     },
     {
-      name: "fileExplorer",
-      isOpen: false,
-      isMinimized: false,
-      isOnTaskBar: true,
+      ...template,
+      name: "File Explorer",
+      isDir: true,
       iconUrl: "/icons/file-explorer.png",
     },
     {
+      ...template,
       name: "vsCode",
-      isOpen: false,
-      isMinimized: false,
-      isOnTaskBar: true,
       iconUrl: "/icons/vscode.png",
     },
     {
+      ...template,
       name: "Recycle Bin",
-      isOpen: false,
-      isMinimized: false,
+      isDir: true,
       isOnTaskBar: false,
       iconUrl: "/icons/recycle-bin.png",
     },
     {
+      ...template,
       name: "About Author",
-      isOpen: false,
-      isMinimized: false,
+      isDir: true,
       isOnTaskBar: false,
       iconUrl: "/icons/folder.png",
     },
     {
+      ...template,
       name: "New folder",
-      isOpen: false,
-      isMinimized: false,
+      isDir: true,
       isOnTaskBar: false,
       iconUrl: "/icons/folder.png",
+    },
+    {
+      ...template,
+      name: "Settings",
+      iconUrl: "/icons/settings.png",
     },
   ],
   handleOpenApp: (appName: AppNameType) =>
@@ -99,11 +101,23 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
     set((state) => {
       const folder: AppType = {
         name: "New folder",
+        isDir: false,
         isOpen: false,
         isMinimized: false,
         isOnTaskBar: false,
         iconUrl: "/icons/folder.png",
       };
       return { apps: [...state.apps, folder] };
+    }),
+
+  handleAddAppToTaskBar: (appName: AppNameType, isTempOnTaskBar: boolean) =>
+    set((state) => {
+      const updatedApps = state.apps.map((app) =>
+        app.name === appName
+          ? { ...app, isTempOnTaskBar: isTempOnTaskBar }
+          : app
+      );
+
+      return { apps: updatedApps };
     }),
 }));

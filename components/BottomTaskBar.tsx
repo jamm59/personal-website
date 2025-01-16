@@ -17,7 +17,7 @@ export default function BottomTaskBar() {
   return (
     <footer className="z-20 select-none bg-[rgba(255,255,255,0.7)] h-[4rem] md:h-[3rem] absolute bottom-0 left-0 right-0 p-4 flex sm:justify-start justify-center gap-1 items-center">
       {apps
-        .filter((app: AppType) => app.isOnTaskBar)
+        .filter((app: AppType) => app.isOnTaskBar || app.isTempOnTaskBar)
         .map((app: AppType, idx: number) => (
           <button
             key={idx}

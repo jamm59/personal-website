@@ -24,18 +24,12 @@ const WindowsRightClick = () => {
       {
         name: "View",
         icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
+          <img
             width="24"
             height="24"
-            fill="currentColor"
-          >
-            <rect x="3" y="3" width="8" height="8" rx="2" />
-            <rect x="13" y="3" width="8" height="8" rx="2" />
-            <rect x="3" y="13" width="8" height="8" rx="2" />
-            <rect x="13" y="13" width="8" height="8" rx="2" />
-          </svg>
+            src="https://img.icons8.com/fluency-systems-regular/50/four-squares.png"
+            alt="four-squares"
+          />
         ),
         submenu: [
           {
@@ -71,19 +65,12 @@ const WindowsRightClick = () => {
             command: "",
             icon: (
               <>
-                {" "}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
+                <img
                   width="24"
                   height="24"
-                  fill="currentColor"
-                >
-                  <rect x="3" y="3" width="8" height="8" rx="2" />
-                  <rect x="13" y="3" width="8" height="8" rx="2" />
-                  <rect x="3" y="13" width="8" height="8" rx="2" />
-                  <rect x="13" y="13" width="8" height="8" rx="2" />
-                </svg>
+                  src="https://img.icons8.com/fluency-systems-regular/50/four-squares.png"
+                  alt="four-squares"
+                />
               </>
             ),
           },
@@ -121,23 +108,12 @@ const WindowsRightClick = () => {
         name: "Refresh",
         command: "",
         icon: (
-          <svg
-            className="w-6 h-6 text-gray-800"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
+          <img
             width="24"
             height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1"
-              d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4"
-            />
-          </svg>
+            src="https://img.icons8.com/windows/32/recurring-appointment.png"
+            alt="recurring-appointment"
+          />
         ),
       },
     ],

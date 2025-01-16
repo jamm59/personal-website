@@ -1,19 +1,20 @@
 export type AppNameType =
-  | "folder"
-  | "taskview"
-  | "fileExplorer"
-  | "browser"
-  | "copilot"
-  | "microsoftStore"
-  | "windowsMenu"
+  | "Folder"
+  | "Task View"
+  | "File Explorer"
+  | "Copilot"
+  | "Microsoft Store"
+  | "Start"
   | "vsCode"
   | string;
 
 export interface AppType {
   name: AppNameType;
+  isDir: boolean;
   isOpen: boolean;
   isMinimized: boolean;
   isOnTaskBar: boolean;
+  isTempOnTaskBar?: boolean;
   iconUrl: string;
   children?: AppType[];
 }
@@ -24,4 +25,5 @@ export interface FileManagerType {
   handleCloseApp: (appName: AppNameType) => void;
   handleMinimizeApp: (appName: AppNameType) => void;
   handleCreateNewFolder: () => void;
+  handleAddAppToTaskBar: (appName: AppNameType, isOnTaskBar: boolean) => void;
 }
