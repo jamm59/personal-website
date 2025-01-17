@@ -45,6 +45,11 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
     },
     {
       ...template,
+      name: "Settings",
+      iconUrl: "/icons/settings.png",
+    },
+    {
+      ...template,
       name: "Recycle Bin",
       isDir: true,
       isOnTaskBar: false,
@@ -63,11 +68,6 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       isDir: true,
       isOnTaskBar: false,
       iconUrl: "/icons/folder.png",
-    },
-    {
-      ...template,
-      name: "Settings",
-      iconUrl: "/icons/settings.png",
     },
   ],
   handleOpenApp: (appName: AppNameType) =>

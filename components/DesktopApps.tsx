@@ -3,19 +3,7 @@ import Image from "next/image";
 import { FileManagerType, AppType } from "..";
 import { useFileMangerStore } from "@/store/data";
 
-const stringPadding = (input: string, maxLength: number): string => {
-  const stringLength = input.length;
-  const difference = maxLength - stringLength;
-
-  if (stringLength > maxLength) {
-    return input.slice(0, maxLength - 3) + "...";
-  }
-
-  for (let i = 0; i < difference; i++) {
-    input = input.concat(" ");
-  }
-  return input;
-};
+import { stringPadding } from "@/utils/methods";
 
 export default function DesktopApps() {
   const handleOpenApp = useFileMangerStore(
@@ -51,10 +39,10 @@ export default function DesktopApps() {
                   width={48}
                   height={48}
                 ></Image>
-                <span className="group-focus:hidden flex font-openSans whitespace-nowrap w-[5rem] text-sm font-semibold p-1 text-white">
+                <span className="justify-center items-center group-focus:hidden flex font-openSans whitespace-nowrap w-[5rem] text-sm font-semibold p-1 text-white">
                   {stringPadding(app.name, 11)}
                 </span>
-                <span className="group-focus:flex hidden font-openSans whitespace-nowrap w-[5rem] text-sm font-semibold p-1 text-white">
+                <span className="justify-center items-center group-focus:flex hidden font-openSans whitespace-nowrap w-[5rem] text-sm font-semibold p-1 text-white">
                   {app.name}
                 </span>
               </button>

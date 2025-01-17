@@ -1,8 +1,10 @@
 "use client";
-import { useState, useRef, forwardRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useFileMangerStore } from "@/store/data";
 import { FileManagerType, AppType } from "..";
 import FileExplorer from "./FileExplorer";
+import StartWindow from "./StartWindow";
+
 export default function AppLauncher() {
   const apps = useFileMangerStore<AppType[]>(
     (state: FileManagerType) => state.apps
@@ -39,14 +41,11 @@ export default function AppLauncher() {
   };
 
   return (
-    <>
-      {apps.map(
-        (app: AppType, idx: number) =>
-          app.isDir &&
-          app.isOpen &&
-          !app.isMinimized && (
+    <div className="">
+      {apps.map((app: AppType, idx: number) => (
+        <div key={idx}>
+          {app.isDir && app.isOpen && !app.isMinimized && (
             <div
-              key={idx}
               onMouseUp={handleMouseUp}
               onMouseMove={(e) => handleMouseMove(e, idx)}
               className="select-none absolute inset-0 grid place-items-center"
@@ -57,8 +56,10 @@ export default function AppLauncher() {
                 appName={app.name}
               />
             </div>
-          )
-      )}
-    </>
+          )}
+          {app.name === "Start" && <StartWindow app={app} />}
+        </div>
+      ))}
+    </div>
   );
 }

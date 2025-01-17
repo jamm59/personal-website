@@ -44,6 +44,45 @@ const FileExplorer = forwardRef((props: FileExplorerType, ref: any) => {
     setIsMaximized(!isMaximized);
   };
 
+  const pinnedItems: any = [
+    {
+      name: "Desktop",
+      iconUrl: "https://img.icons8.com/fluency/48/desktop.png",
+      size: 24,
+      alt: "desktop",
+    },
+    {
+      name: "Downloads",
+      iconUrl: "https://img.icons8.com/fluency/48/downloads-folder--v2.png",
+      size: 24,
+      alt: "",
+    },
+    {
+      name: "Documents",
+      iconUrl: "https://img.icons8.com/fluency/48/open-document.png",
+      size: 24,
+      alt: "open-document",
+    },
+    {
+      name: "Pictures",
+      iconUrl: "https://img.icons8.com/fluency/48/stack-of-photos.png",
+      size: 24,
+      alt: "stack-of-photos",
+    },
+    {
+      name: "Music",
+      iconUrl: "https://img.icons8.com/fluency/48/music.png",
+      size: 24,
+      alt: "music",
+    },
+    {
+      name: "Video",
+      iconUrl: "https://img.icons8.com/fluency/48/cinema-.png",
+      size: 24,
+      alt: "cinema",
+    },
+  ];
+
   return (
     <>
       <div
@@ -418,8 +457,8 @@ const FileExplorer = forwardRef((props: FileExplorerType, ref: any) => {
                           className="text-sm whitespace-nowrap gap-2 flex justify-start mb-1 items-center"
                         >
                           <img
-                            width={60 - value.size + value.size}
-                            height={60 - value.size + value.size}
+                            width={value.size * 2}
+                            height={value.size * 2}
                             src={value.iconUrl}
                             alt="desktop"
                           />
@@ -445,7 +484,7 @@ const FileExplorer = forwardRef((props: FileExplorerType, ref: any) => {
               </div>
             </div>
             <div className="h-6 flex justify-start items-center px-4 font-openSans text-sm bg-zinc-900 absolute bottom-0 w-full">
-              31 items |
+              14 items |
             </div>
           </div>
         </div>
@@ -455,42 +494,3 @@ const FileExplorer = forwardRef((props: FileExplorerType, ref: any) => {
 });
 
 export default FileExplorer;
-
-const pinnedItems = [
-  {
-    name: "Desktop",
-    iconUrl: "https://img.icons8.com/fluency/48/desktop.png",
-    size: 24,
-    alt: "desktop",
-  },
-  {
-    name: "Downloads",
-    iconUrl: "https://img.icons8.com/fluency/48/downloads-folder--v2.png",
-    size: 24,
-    alt: "",
-  },
-  {
-    name: "Documents",
-    iconUrl: "https://img.icons8.com/fluency/48/open-document.png",
-    size: 24,
-    alt: "open-document",
-  },
-  {
-    name: "Pictures",
-    iconUrl: "https://img.icons8.com/fluency/48/stack-of-photos.png",
-    size: 24,
-    alt: "stack-of-photos",
-  },
-  {
-    name: "Music",
-    iconUrl: "https://img.icons8.com/fluency/48/music.png",
-    size: 24,
-    alt: "music",
-  },
-  {
-    name: "Video",
-    iconUrl: "https://img.icons8.com/fluency/48/cinema-.png",
-    size: 24,
-    alt: "cinema",
-  },
-];
