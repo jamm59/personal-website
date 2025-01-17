@@ -41,7 +41,7 @@ export default function BottomTaskBar() {
             ></div>
           </button>
         ))}
-      <button className="absolute right-4 text-black p-3 min-w-fit w-[5rem] h-full flex flex-col justify-center items-end text-xs font-mono">
+      <button className="absolute sm:hidden right-4 text-black p-3 min-w-fit w-[5rem] h-full flex flex-col justify-center items-end text-xs font-mono">
         <span>
           {currentTime.getHours()}:
           {currentTime.getMinutes() < 10

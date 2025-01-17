@@ -1,5 +1,4 @@
 "use client";
-import FileExplorer from "@/components/FileExplorer";
 import WindowsRightClick from "@/components/WindowsRightClick";
 import BottomTaskBar from "@/components/BottomTaskBar";
 import DesktopApps from "@/components/DesktopApps";
