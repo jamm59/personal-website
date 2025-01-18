@@ -31,6 +31,14 @@ export default function StartWindow({ app }: { app: AppType }) {
     }
   }, [ref, app]);
 
+  const handleOpenApp = useFileMangerStore(
+    (state: FileManagerType) => state.handleOpenApp
+  );
+
+  const handleAddAppToTaskBar = useFileMangerStore(
+    (state: FileManagerType) => state.handleAddAppToTaskBar
+  );
+
   return (
     <div
       className="select-none absolute inset-0 grid place-items-center"
@@ -86,10 +94,10 @@ export default function StartWindow({ app }: { app: AppType }) {
                 .map((app: AppType, idx: number) => (
                   <div key={idx}>
                     <button
-                      //   onClick={() => {
-                      //     handleOpenApp(app.name);
-                      //     handleAddAppToTaskBar(app.name, true);
-                      //   }}
+                      onClick={() => {
+                        handleOpenApp(app.name);
+                        handleAddAppToTaskBar(app.name, true);
+                      }}
                       className="group hover:bg-[rgb(255,255,255,0.1)] p-1 rounded-md transition-all duration-100 flex justify-center items-center flex-col"
                     >
                       <Image

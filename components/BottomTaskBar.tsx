@@ -15,14 +15,15 @@ export default function BottomTaskBar() {
 
   const currentTime: Date = new Date();
   return (
-    <footer className="z-20 select-none dark:bg-[rgba(0,0,0,0.6)]  bg-[rgba(255,255,255,0.7)] h-[4rem] md:h-[3rem] absolute bottom-0 left-0 right-0 p-4 flex sm:justify-start justify-center gap-1 items-center">
+    <footer className="z-20 select-none dark:bg-[rgba(0,0,0,0.6)]  bg-[rgba(255,255,255,0.7)] h-[3.5rem] absolute bottom-0 left-0 right-0 p-4 flex sm:justify-start justify-center gap-1 items-center">
       {apps
         .filter((app: AppType) => app.isOnTaskBar || app.isTempOnTaskBar)
         .map((app: AppType, idx: number) => (
           <button
             key={idx}
             onClick={() => {
-              if (app.isMinimized) return handleMinimizeApp(app.name);
+              if (app.isMinimized || app.isOpen)
+                return handleMinimizeApp(app.name);
               handleOpenApp(app.name);
             }}
             className="p-2 relative group hover:shadow-md rounded-md transition-all duration-100"

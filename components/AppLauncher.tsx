@@ -4,7 +4,7 @@ import { useFileMangerStore } from "@/store/data";
 import { FileManagerType, AppType } from "..";
 import FileExplorer from "./FileExplorer";
 import StartWindow from "./StartWindow";
-import CustomTerminal from "./Terminal";
+import CustomTerminal from "./CommandLineTerminal";
 
 export default function AppLauncher() {
   const apps = useFileMangerStore<AppType[]>(

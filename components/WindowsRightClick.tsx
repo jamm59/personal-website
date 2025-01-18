@@ -253,8 +253,23 @@ const WindowsRightClick = () => {
 
   const handleContextMenu = (e: any) => {
     e.preventDefault();
-    setMenuPosition({ x: e.pageX, y: e.pageY });
     setMenuVisible(true);
+
+    const pageWidth: number = window.outerWidth;
+    const pageHeight: number = window.outerHeight;
+    const limitY: number = 500;
+    const limitX: number = 300;
+
+    if (e.pageX >= pageWidth - limitX && e.pageY >= pageHeight - limitY) {
+      setMenuPosition({ x: e.pageX - 300, y: e.pageY - limitY + 70 });
+    } else if (e.pageX >= pageWidth - limitX) {
+      console.log(e.pageX, pageWidth);
+      setMenuPosition({ x: e.pageX - 300, y: e.pageY });
+    } else if (e.pageY >= pageHeight - limitY) {
+      setMenuPosition({ x: e.pageX, y: e.pageY - limitY + 70 });
+    } else {
+      setMenuPosition({ x: e.pageX, y: e.pageY });
+    }
   };
 
   const handleClick = () => {

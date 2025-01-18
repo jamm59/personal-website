@@ -28,7 +28,6 @@ export default function DesktopApps() {
               <button
                 onDoubleClick={() => {
                   handleOpenApp(app.name);
-                  console.log("opening name: " + app.name);
                   handleAddAppToTaskBar(app.name, true);
                 }}
                 className="group hover:bg-[rgb(255,255,255,0.1)] p-1 rounded-md transition-all duration-100 flex justify-center items-center flex-col"
@@ -40,7 +39,7 @@ export default function DesktopApps() {
                   height={48}
                 ></Image>
                 <span className="justify-center items-center group-focus:hidden flex font-openSans whitespace-nowrap w-[5rem] text-sm font-semibold p-1 text-white">
-                  {stringPadding(app.name, 11)}
+                  {stringPadding(app.name, 13)}
                 </span>
                 <span className="justify-center items-center group-focus:flex hidden font-openSans whitespace-nowrap w-[5rem] text-sm font-semibold p-1 text-white">
                   {app.name}
