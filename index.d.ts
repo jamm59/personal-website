@@ -14,7 +14,8 @@ export interface AppType {
   isOpen: boolean;
   isMinimized: boolean;
   isOnTaskBar: boolean;
-  isTempOnTaskBar?: boolean;
+  canAddPages: boolean;
+  isTempOnTaskBar: boolean;
   iconUrl: string;
   children?: AppType[];
 }

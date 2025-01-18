@@ -7,6 +7,7 @@ const template = {
   isOpen: false,
   isMinimized: false,
   isOnTaskBar: true,
+  canAddPages: false,
   isTempOnTaskBar: false,
   iconUrl: "/icons/windows.png",
 };
@@ -36,6 +37,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       ...template,
       name: "File Explorer",
       isDir: true,
+      canAddPages: true,
       iconUrl: "/icons/file-explorer.png",
     },
     {
@@ -66,6 +68,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       ...template,
       name: "New folder",
       isDir: true,
+      canAddPages: true,
       isOnTaskBar: false,
       iconUrl: "/icons/folder.png",
     },
@@ -74,14 +77,18 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       name: "Terminal",
       isDir: false,
       isOnTaskBar: false,
+      canAddPages: true,
       iconUrl: "/icons/terminal.png",
     },
   ],
   handleOpenApp: (appName: AppNameType) =>
     set((state) => {
-      const updatedApps = state.apps.map((app) =>
-        app.name === appName ? { ...app, isOpen: true } : app
-      );
+      const updatedApps = state.apps.map((app) => {
+        if (appName != "Start" && app.name === "Start")
+          return { ...app, isOpen: false };
+        if (app.name === appName) return { ...app, isOpen: true };
+        return app;
+      });
 
       return { apps: updatedApps };
     }),
@@ -107,10 +114,10 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
   handleCreateNewFolder: () =>
     set((state) => {
       const folder: AppType = {
+        ...template,
         name: "New folder",
-        isDir: false,
-        isOpen: false,
-        isMinimized: false,
+        isDir: true,
+        canAddPages: true,
         isOnTaskBar: false,
         iconUrl: "/icons/folder.png",
       };
