@@ -45,14 +45,14 @@ export default function StartWindow({ app }: { app: AppType }) {
         style={{
           bottom: "-40rem",
         }}
-        className="absolute bottom-0 transition-all ease-in-out duration-300 bg-[rgba(255,255,255,0.5)] backdrop-blur-md overflow-hidden dark:bg-[rgba(0,0,0,0.4)] rounded-md h-[600px] w-[600px]"
+        className="absolute bottom-0 transition-all ease-in-out duration-300 bg-[rgba(255,255,255,0.4)] backdrop-blur-md overflow-hidden dark:bg-[rgba(0,0,0,0.4)] rounded-md h-[600px] w-[600px]"
       >
         <div className="h-full">
           <div className="h-[10%] grid place-items-center px-10">
             <div className="w-full relative">
               <input
                 type="text"
-                className="bg-gray-950 border-[1px] w-full rounded-full pl-10 border-[rgba(255,255,255,0.1)] focus:outline-none pr-3 py-1"
+                className="bg-[rgba(0,0,0,0.3)] dark:bg-[rgba(0,0,0,0.4)] border-[1px] w-full rounded-full pl-12 border-[rgba(255,255,255,0.1)] focus:outline-none pr-3 py-1"
                 placeholder="Search for apps, settings, and documents"
               />
               <img
