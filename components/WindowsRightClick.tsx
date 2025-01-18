@@ -313,10 +313,10 @@ const WindowsRightClick = () => {
   );
 
   return (
-    <div className="font-openSans flex items-center justify-center overflow-hidden">
+    <div className="font-openSans flex items-center justify-center overflow-hidden z-50">
       {menuVisible && (
         <div
-          className="absolute z-50 bg-white rounded-md shadow-md border w-72 text-sm text-gray-800"
+          className="absolute bg-[rgba(255,255,255,0.9)] rounded-md shadow-md border w-72 text-sm text-gray-800"
           style={{ top: menuPosition.y, left: menuPosition.x }}
         >
           {Object.entries(menuItems).map(([group, items], groupIdx) => (

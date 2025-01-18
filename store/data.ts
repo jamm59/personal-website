@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { AppNameType, AppType, FileManagerType } from "..";
+import { parse } from "path";
 
 const template = {
   name: "None",
@@ -55,6 +56,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       name: "Recycle Bin",
       isDir: true,
       isOnTaskBar: false,
+      canAddPages: true,
       iconUrl: "/icons/recycle-bin.png",
     },
     {
@@ -62,6 +64,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       name: "About Author",
       isDir: true,
       isOnTaskBar: false,
+      canAddPages: true,
       iconUrl: "/icons/folder.png",
     },
     {
@@ -113,9 +116,25 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
   // desktop functions
   handleCreateNewFolder: () =>
     set((state) => {
+      let newFolderName: string = "New folder";
+      const otherNames = state.apps.filter((app: AppType) =>
+        app.name.startsWith(newFolderName)
+      );
+      if (otherNames.length >= 1) {
+        const lastItem = otherNames[otherNames.length - 1];
+        let previousNumber: number = parseInt(
+          lastItem.name.split(" ")[lastItem.name.split(" ").length - 1]
+        );
+        if (!isNaN(previousNumber)) {
+          newFolderName += " " + (previousNumber + 1).toString();
+        } else {
+          newFolderName += " 1";
+        }
+      }
+
       const folder: AppType = {
         ...template,
-        name: "New folder",
+        name: newFolderName,
         isDir: true,
         canAddPages: true,
         isOnTaskBar: false,
