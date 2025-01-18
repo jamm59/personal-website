@@ -69,6 +69,13 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       isOnTaskBar: false,
       iconUrl: "/icons/folder.png",
     },
+    {
+      ...template,
+      name: "Terminal",
+      isDir: false,
+      isOnTaskBar: false,
+      iconUrl: "/icons/terminal.png",
+    },
   ],
   handleOpenApp: (appName: AppNameType) =>
     set((state) => {

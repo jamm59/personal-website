@@ -4,6 +4,7 @@ import { useFileMangerStore } from "@/store/data";
 import { FileManagerType, AppType } from "..";
 import FileExplorer from "./FileExplorer";
 import StartWindow from "./StartWindow";
+import CustomTerminal from "./Terminal";
 
 export default function AppLauncher() {
   const apps = useFileMangerStore<AppType[]>(
@@ -58,6 +59,7 @@ export default function AppLauncher() {
             </div>
           )}
           {app.name === "Start" && <StartWindow app={app} />}
+          {app.name === "Terminal" && <CustomTerminal app={app} />}
         </div>
       ))}
     </div>
