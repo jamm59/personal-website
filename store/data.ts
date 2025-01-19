@@ -158,7 +158,6 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
 
   handlePinAndUnpinTaskBarApps: (appName: AppNameType, pinOrUnpin: boolean) =>
     set((state) => {
-      console.log(pinOrUnpin);
       const updatedApps = state.apps.map((app) =>
         app.name === appName ? { ...app, isOnTaskBar: pinOrUnpin } : app
       );

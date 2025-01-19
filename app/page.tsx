@@ -13,9 +13,9 @@ export default function Home() {
       className="relative h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-cover overflow-hidden"
     >
       <main className="w-full h-full relative z-10">
+        <DesktopApps />
         <AppLauncher />
         <WindowsRightClick />
-        <DesktopApps />
       </main>
       <BottomTaskBar />
     </div>
