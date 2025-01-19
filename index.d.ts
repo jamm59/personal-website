@@ -16,6 +16,7 @@ export interface AppType {
   isOnTaskBar: boolean;
   canAddPages: boolean;
   isTempOnTaskBar: boolean;
+  isOnBothDeskTopAndTaskBar: boolean;
   iconUrl: string;
   children?: AppType[];
 }
@@ -27,4 +28,8 @@ export interface FileManagerType {
   handleMinimizeApp: (appName: AppNameType) => void;
   handleCreateNewFolder: () => void;
   handleAddAppToTaskBar: (appName: AppNameType, isOnTaskBar: boolean) => void;
+  handlePinAndUnpinTaskBarApps: (
+    appName: AppNameType,
+    pinOrUnpin: boolean
+  ) => void;
 }

@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import { AppNameType, AppType, FileManagerType } from "..";
-import { parse } from "path";
 
-const template = {
+const template: AppType = {
   name: "None",
   isDir: false,
   isOpen: false,
@@ -10,6 +9,7 @@ const template = {
   isOnTaskBar: true,
   canAddPages: false,
   isTempOnTaskBar: false,
+  isOnBothDeskTopAndTaskBar: false,
   iconUrl: "/icons/windows.png",
 };
 export const useFileMangerStore = create<FileManagerType>((set) => ({
@@ -41,16 +41,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       canAddPages: true,
       iconUrl: "/icons/file-explorer.png",
     },
-    {
-      ...template,
-      name: "vsCode",
-      iconUrl: "/icons/vscode.png",
-    },
-    {
-      ...template,
-      name: "Settings",
-      iconUrl: "/icons/settings.png",
-    },
+
     {
       ...template,
       name: "Recycle Bin",
@@ -58,6 +49,17 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       isOnTaskBar: false,
       canAddPages: true,
       iconUrl: "/icons/recycle-bin.png",
+    },
+    {
+      ...template,
+      name: "vsCode",
+      isOnBothDeskTopAndTaskBar: true,
+      iconUrl: "/icons/vscode.png",
+    },
+    {
+      ...template,
+      name: "Settings",
+      iconUrl: "/icons/settings.png",
     },
     {
       ...template,
@@ -69,7 +71,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
     },
     {
       ...template,
-      name: "New folder",
+      name: "Wallpapers",
       isDir: true,
       canAddPages: true,
       isOnTaskBar: false,
@@ -149,6 +151,16 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
         app.name === appName
           ? { ...app, isTempOnTaskBar: isTempOnTaskBar }
           : app
+      );
+
+      return { apps: updatedApps };
+    }),
+
+  handlePinAndUnpinTaskBarApps: (appName: AppNameType, pinOrUnpin: boolean) =>
+    set((state) => {
+      console.log(pinOrUnpin);
+      const updatedApps = state.apps.map((app) =>
+        app.name === appName ? { ...app, isOnTaskBar: pinOrUnpin } : app
       );
 
       return { apps: updatedApps };

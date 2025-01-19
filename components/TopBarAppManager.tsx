@@ -37,7 +37,6 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
   const handleCloseApp = () => {
     closeAppFunction(app.name);
     handleAddAppToTaskBar(app.name, false);
-    console.log("closing name: " + app.name);
   };
   const handleMinimizeApp = () => {
     minimizeFunction(app.name);

@@ -277,10 +277,10 @@ const WindowsRightClick = () => {
     setSubmenuVisible(null);
   };
 
-  useEffect(() => {
-    document.addEventListener("contextmenu", handleContextMenu);
-    return () => document.removeEventListener("contextmenu", handleContextMenu);
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener("contextmenu", handleContextMenu);
+  //   return () => document.removeEventListener("contextmenu", handleContextMenu);
+  // }, []);
 
   useEffect(() => {
     document.addEventListener("click", handleClick);
