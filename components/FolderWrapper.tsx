@@ -311,27 +311,25 @@ const FolderWrapper = (props: FolderWrapperType) => {
                 </div>
                 <div className="w-full min-h-1/2 border-b-[1px] border-gray-700 flex flex-col justify-center items-start gap-1 p-4">
                   {pinnedItems.map((value: any, idx: number) => (
-                    <>
-                      <div
-                        key={idx}
-                        className="text-sm whitespace-nowrap flex justify-around mb-1 items-center gap-2 w-full"
-                      >
-                        <img
-                          width={value.size}
-                          height={value.size}
-                          src={value.iconUrl}
-                          alt={value.alt}
-                        />
-                        <span>{value.name}</span>
-                        <img
-                          width={value.size - 4}
-                          height={value.size - 4}
-                          className="ml-auto"
-                          src="https://img.icons8.com/ios-filled/50/737373/pin3.png"
-                          alt="pin3"
-                        />
-                      </div>
-                    </>
+                    <div
+                      key={idx}
+                      className="text-sm whitespace-nowrap flex justify-around mb-1 items-center gap-2 w-full"
+                    >
+                      <img
+                        width={value.size}
+                        height={value.size}
+                        src={value.iconUrl}
+                        alt={value.alt}
+                      />
+                      <span>{value.name}</span>
+                      <img
+                        width={value.size - 4}
+                        height={value.size - 4}
+                        className="ml-auto"
+                        src="https://img.icons8.com/ios-filled/50/737373/pin3.png"
+                        alt="pin3"
+                      />
+                    </div>
                   ))}
                 </div>
                 <div className="w-full min-h-1/2 flex flex-col justify-center items-start gap-1 p-4">

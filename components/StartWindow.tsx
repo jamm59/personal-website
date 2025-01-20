@@ -131,26 +131,24 @@ export default function StartWindow({ app }: { app: AppType }) {
               </button>
             </div>
             <div className="w-full h-fit flex flex-wrap justify-start items-center gap-5 py-5 px-10">
-              {placeHolderText.map((value: any, idx: number) => (
-                <>
-                  <div
-                    key={idx}
-                    className="text-sm whitespace-nowrap gap-2 flex justify-start mb-1 items-center"
-                  >
-                    <img
-                      width="48"
-                      height="48"
-                      src="https://img.icons8.com/fluency/48/image-file.png"
-                      alt="image-file"
-                    />
-                    <div className="flex flex-col h-full pl#4-3">
-                      <span>{value}</span>
-                      <span className="text-xs opacity-70">
-                        Yesterday at 17:45
-                      </span>
-                    </div>
+              {placeHolderText.map((value: string, idx: number) => (
+                <div
+                  key={idx}
+                  className="text-sm whitespace-nowrap gap-2 flex justify-start mb-1 items-center"
+                >
+                  <img
+                    width="48"
+                    height="48"
+                    src="https://img.icons8.com/fluency/48/image-file.png"
+                    alt="image-file"
+                  />
+                  <div className="flex flex-col h-full pl#4-3">
+                    <span>{value}</span>
+                    <span className="text-xs opacity-70">
+                      Yesterday at 17:45
+                    </span>
                   </div>
-                </>
+                </div>
               ))}
             </div>
             {}
