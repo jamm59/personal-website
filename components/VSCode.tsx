@@ -25,8 +25,8 @@ export default function CodeEditor({ app }: CodeEditorType) {
       bgColor={bgColor}
       AppIcon={() => (
         <img
-          width="24"
-          height="24"
+          width="20"
+          height="20"
           src="https://img.icons8.com/color/48/visual-studio-code-2019.png"
           alt="visual-studio-code-2019"
         />

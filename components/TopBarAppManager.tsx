@@ -14,8 +14,8 @@ interface TopBarAppManagerType {
 const TopBarAppManager = (props: TopBarAppManagerType) => {
   const { app, children, titleColor, bgColor, AppIcon } = props;
   // constants and variables
-  const foregroundColor: string = "rgba(255,255,255,1)";
-  const backgroundColor: string = "rgba(255,255,255,0.6)";
+  const foregroundColor: string = "rgba(255,255,255,0.1)";
+  const backgroundColor: string = "rgba(255,255,255,0.7)";
   const customWindowWidth: string = "80%";
 
   // Global state
@@ -94,10 +94,10 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
                 backgroundColor: app.canAddPages ? bgColor : "",
                 color: app.canAddPages ? titleColor : "black",
               }}
-              className="p-1 select-none font-sans text-sm font-semibold w-[35%] rounded-t-md h-full flex justify-between pl-2 items-center"
+              className="py-1 px-2 select-none font-sans text-sm font-semibold w-[35%] rounded-t-md h-full flex justify-between pl-2 items-center"
             >
               <AppIcon />
-              <span className="mr-auto ml-2 ">{app.name}</span>
+              <span className="mr-auto ml-2">{app.name}</span>
               {app.canAddPages && (
                 <img
                   width="12"
@@ -107,13 +107,14 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
                 />
               )}
             </div>
-            <div className="select-none font-openSans font-semibold w-fit rounded-t-md h-full flex justify-between px-3 items-center">
+            <div className="select-none font-openSans font-semibold w-fit rounded-t-md h-full flex justify-between px-2 items-center">
               {app.canAddPages && (
                 <img
-                  width="10"
-                  height="10"
-                  src="https://img.icons8.com/metro/26/plus-math.png"
-                  alt="plus-math"
+                  className="rotate-45"
+                  width="12"
+                  height="12"
+                  src="https://img.icons8.com/ios-glyphs/30/737373/multiply.png"
+                  alt="multiply"
                 />
               )}
             </div>
