@@ -1,12 +1,16 @@
 "use client";
 import { Terminal } from "primereact/terminal";
 import { TerminalService } from "primereact/terminalservice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import TopBarAppManager from "./TopBarAppManager";
 import { AppType } from "..";
 export default function CustomTerminal({ app }: { app: AppType }) {
   const terminalColor: string = "#1A1A19";
 
+  const [welcomeMessage, setWelcomeMessage] =
+    useState<string>(`Windows PowerShell 
+Copyright Microsoft Corporation. All rights reserved. 
+Install the latest PowerShell for new features and improvements! https://aka.ns/PSWindows.`);
   useEffect(() => {
     // Add command listener
     const commandHandler = (commandText: string) => {
@@ -25,6 +29,7 @@ export default function CustomTerminal({ app }: { app: AppType }) {
           );
           break;
         case "clear":
+          setWelcomeMessage("");
           TerminalService.emit("clear"); // Clear terminal content
           return; // Skip sending a response
         default:
@@ -64,9 +69,7 @@ export default function CustomTerminal({ app }: { app: AppType }) {
           <Terminal
             style={{ backgroundColor: terminalColor }}
             className="h-full p-3 font-mono"
-            welcomeMessage={`Windows PowerShell 
-Copyright Microsoft Corporation. All rights reserved. 
-Install the latest PowerShell for new features and improvements! https://aka.ns/PSWindows.`}
+            welcomeMessage={welcomeMessage}
             prompt="PS C:\Users\PC\Desktop>"
             pt={{
               welcomeMessage: {
