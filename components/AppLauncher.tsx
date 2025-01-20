@@ -17,7 +17,9 @@ export default function AppLauncher() {
     <div className="">
       {apps.map((app: AppType, idx: number) => (
         <div key={idx}>
-          {app.isDir && <FolderWrapper app={app} />}
+          {app.isDir && app.name !== "File Explorer" && (
+            <FolderWrapper app={app} />
+          )}
           {app.name === "Start" && <StartWindow app={app} />}
           {app.name === "Terminal" && <CustomTerminal app={app} />}
           {app.name === "vsCode" && <CodeEditor app={app} />}
