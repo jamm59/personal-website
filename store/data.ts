@@ -15,27 +15,22 @@ const template: AppType = {
 
 const wallpapers: FileType[] = [
   {
-    type: "picture",
+    type: "image",
     name: "wallpaper-purple.jpg",
     iconUrl: "/icons/photo.png",
   },
   {
-    type: "picture",
+    type: "image",
     name: "wallpaper-nun.jpg",
     iconUrl: "/icons/photo.png",
   },
   {
-    type: "picture",
+    type: "image",
     name: "wallpaper-black.jpg",
     iconUrl: "/icons/photo.png",
   },
 ];
 export const useFileMangerStore = create<FileManagerType>((set) => ({
-  wallpaper: "wallpaper-purple.jpg",
-  setWallpaper: (wallpaperName: string) =>
-    set((state: FileManagerType) => {
-      return { wallpaper: wallpaperName };
-    }),
   apps: [
     {
       ...template,
@@ -97,7 +92,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       canAddPages: true,
       isOnTaskBar: false,
       iconUrl: "/icons/folder.png",
-      children: [...wallpapers],
+      children: [...wallpapers.map((file: FileType) => ({ ...file }))],
     },
     {
       ...template,
@@ -108,6 +103,11 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       iconUrl: "/icons/terminal.png",
     },
   ],
+  wallpaper: "wallpaper-purple.jpg",
+  setWallpaper: (wallpaperName: string) =>
+    set((state: FileManagerType) => {
+      return { wallpaper: wallpaperName };
+    }),
   handleOpenApp: (appName: AppNameType) =>
     set((state) => {
       const updatedApps = state.apps.map((app) => {

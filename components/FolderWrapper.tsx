@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AppType } from "..";
 import TopBarAppManager from "./TopBarAppManager";
+import FolderInternals from "./FolderInternals";
 import { pinnedItems } from "@/utils/constants";
 
 interface FolderWrapperType {
@@ -17,19 +18,30 @@ const FolderWrapper = (props: FolderWrapperType) => {
   // components states and references
   const [isMaximized, setIsMaximized] = useState<boolean>(false);
 
+  const newFolderREf = useRef<HTMLDivElement>(null);
+
   return (
     <TopBarAppManager
       app={app}
       titleColor={"black"}
       bgColor={foregroundColor}
-      AppIcon={() => (
-        <img
-          width="20"
-          height="20"
-          src="https://img.icons8.com/fluency/48/home-page.png"
-          alt="home-page"
-        />
-      )}
+      AppIcon={() =>
+        app.name === "File Explorer" ? (
+          <img
+            width="20"
+            height="20"
+            src="https://img.icons8.com/fluency/48/home-page.png"
+            alt="home-page"
+          />
+        ) : (
+          <img
+            width="20"
+            height="20"
+            src="https://img.icons8.com/emoji/48/file-folder-emoji.png"
+            alt="file-folder-emoji"
+          />
+        )
+      }
     >
       <div>
         <div
@@ -63,52 +75,89 @@ const FolderWrapper = (props: FolderWrapperType) => {
             />
           </div>
           <div className="col-span-3 p-2">
-            <div className="bg-white py-1 px-2 flex gap-2 justify-start items-center h-full rounded-md shadow-md">
+            <div className="text-sm bg-white py-1 px-2 flex gap-2 justify-start items-center h-full rounded-md shadow-md">
+              {app.name === "File Explorer" ? (
+                <img
+                  width="20"
+                  height="20"
+                  src="https://img.icons8.com/windows/32/smart-home-2.png"
+                  alt="smart-home-2"
+                />
+              ) : (
+                <img
+                  width="20"
+                  height="20"
+                  src="https://img.icons8.com/forma-light/24/my-computer.png"
+                  alt="my-computer"
+                />
+              )}
               <img
-                width="20"
-                height="20"
-                src="https://img.icons8.com/fluency-systems-regular/50/home--v1.png"
-                alt="home--v1"
-              />
-              <img
-                width="15"
-                height="15"
+                width="10"
+                height="10"
                 src="https://img.icons8.com/windows/32/more-than.png"
                 alt="more-than"
               />
-              <span className="font-mono">Home</span>
-              <img
-                width="15"
-                height="15"
-                src="https://img.icons8.com/windows/32/more-than.png"
-                alt="more-than"
-              />
+              <span className="">{app.name}</span>
             </div>
           </div>
           <div className="p-2">
             <input
               type="text"
               placeholder="Search Desktop"
-              className=" placeholder:text-black font-openSans px-3 shadow-md h-full rounded-md max-w-full focus:outline-none"
+              className=" placeholder:text-[rgba(0,0,0,0.5)] placeholder:text-sm font-openSans px-3 shadow-md h-full rounded-md max-w-full focus:outline-none"
             ></input>
           </div>
         </div>
       </div>
       <div className="h-full flex flex-col">
         <div className="bg-white py-1 h-[5rem] grid border-y-[1px] border-gray-300 grid-cols-7 text-black text-sm">
-          <div className="flex justify-start pl-5 items-center gap-x-1 text-sm font-semibold font-openSans">
+          <div className="flex justify-start pl-5 items-center text-sm font-semibold font-openSans">
             <img
-              width="24"
-              height="24"
-              src="https://img.icons8.com/windows/32/add--v1.png"
-              alt="add--v1"
+              width="20"
+              height="20"
+              src="https://img.icons8.com/cotton/128/plus--v3.png"
+              alt="plus--v3"
             />
-
-            <select className="w-[3.6rem] focus:outline-none">
-              <option value="actual value 1">New</option>
-              <option value="actual value 2">Folder</option>
-              <option value="actual value 3">Shortcut</option>
-            </select>
+            <div
+              onClick={() =>
+                newFolderREf.current && [
+                  newFolderREf.current.classList.toggle("hidden"),
+                  newFolderREf.current.classList.toggle("flex"),
+                ]
+              }
+              className="min-w-full relative flex justify-start items-center gap-x-2 p-2 focus:outline-none"
+            >
+              <button>New</button>
+              <div
+                ref={newFolderREf}
+                className="hidden justify-center flex-col items-start absolute rounded-md p-1 bg-white h-fit left-0 top-[3rem]"
+              >
+                <button className="flex justify-start items-center w-full gap-x-1 hover:bg-[rgba(0,0,0,0.1)] py-1 pl-1 pr-3 rounded-md">
+                  <img
+                    width="20"
+                    height="20"
+                    src="https://img.icons8.com/emoji/48/file-folder-emoji.png"
+                    alt="file-folder-emoji"
+                  />
+                  <span>Folder</span>
+                </button>
+                <button className="flex justify-start items-center w-full gap-x-1 hover:bg-[rgba(0,0,0,0.1)] py-1 pl-1 pr-3 rounded-md">
+                  <img
+                    width="20"
+                    height="20"
+                    src="https://img.icons8.com/fluency/48/shortcut.png"
+                    alt="shortcut"
+                  />
+                  <span>Shortcut</span>
+                </button>
+              </div>
+              <img
+                width="10"
+                height="10"
+                src="https://img.icons8.com/ios-filled/50/expand-arrow--v1.png"
+                alt="expand-arrow--v1"
+              />
+            </div>
           </div>
           <div className="opacity-45 col-span-2 flex px-2 justify-around items-center border-l-[1px] border-gray-300">
             <img
@@ -307,7 +356,7 @@ const FolderWrapper = (props: FolderWrapperType) => {
                 </div>
               </div>
             </div>
-            {children}
+            {children ?? <FolderInternals app={app} />}
           </div>
           <div className="h-6 flex justify-start items-center px-4 font-openSans text-sm bg-zinc-900 absolute bottom-0 w-full">
             14 items |

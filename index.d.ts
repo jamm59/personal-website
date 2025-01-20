@@ -9,9 +9,10 @@ export type AppNameType =
   | string;
 
 export interface FileType {
-  type: "picture";
+  type: "image" | "folder" | "pdf";
   name: AppNameType;
   iconUrl: string;
+  parent?: AppType;
 }
 export interface AppType {
   name: AppNameType;
