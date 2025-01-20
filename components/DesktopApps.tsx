@@ -19,7 +19,7 @@ export default function DesktopApps() {
   );
 
   return (
-    <div className="relative h-full w-fit min-w-[10%] bg-orange-500 px-8 pb-10 pt-5 flex flex-wrap gap-y-4 gap-x-5 justify-start flex-col items-start">
+    <div className="z-20 relative h-full w-fit min-w-[10%] px-8 pb-10 pt-5 flex flex-wrap gap-y-4 gap-x-5 justify-start flex-col items-start">
       {apps
         .filter(
           (app: AppType) => !app.isOnTaskBar || app.isOnBothDeskTopAndTaskBar
@@ -39,6 +39,7 @@ export default function DesktopApps() {
                   src={app.iconUrl}
                   width={48}
                   height={48}
+                  priority
                 ></Image>
                 <span className="justify-center items-center group-focus:hidden flex font-openSans whitespace-nowrap w-[5rem] text-sm font-semibold p-1 text-white">
                   {stringPadding(app.name, 13)}

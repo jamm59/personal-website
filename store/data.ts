@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { AppNameType, AppType, FileManagerType } from "..";
+import { AppNameType, AppType, FileManagerType, FileType } from "..";
 
 const template: AppType = {
   name: "None",
@@ -12,7 +12,30 @@ const template: AppType = {
   isOnBothDeskTopAndTaskBar: false,
   iconUrl: "/icons/windows.png",
 };
+
+const wallpapers: FileType[] = [
+  {
+    type: "picture",
+    name: "wallpaper-purple.jpg",
+    iconUrl: "/icons/photo.png",
+  },
+  {
+    type: "picture",
+    name: "wallpaper-nun.jpg",
+    iconUrl: "/icons/photo.png",
+  },
+  {
+    type: "picture",
+    name: "wallpaper-black.jpg",
+    iconUrl: "/icons/photo.png",
+  },
+];
 export const useFileMangerStore = create<FileManagerType>((set) => ({
+  wallpaper: "wallpaper-purple.jpg",
+  setWallpaper: (wallpaperName: string) =>
+    set((state: FileManagerType) => {
+      return { wallpaper: wallpaperName };
+    }),
   apps: [
     {
       ...template,
@@ -41,14 +64,10 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       canAddPages: true,
       iconUrl: "/icons/file-explorer.png",
     },
-
     {
       ...template,
-      name: "Recycle Bin",
-      isDir: true,
-      isOnTaskBar: false,
-      canAddPages: true,
-      iconUrl: "/icons/recycle-bin.png",
+      name: "Settings",
+      iconUrl: "/icons/settings.png",
     },
     {
       ...template,
@@ -58,8 +77,10 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
     },
     {
       ...template,
-      name: "Settings",
-      iconUrl: "/icons/settings.png",
+      name: "Recycle Bin",
+      isOnTaskBar: false,
+      canAddPages: true,
+      iconUrl: "/icons/recycle-bin.png",
     },
     {
       ...template,
@@ -76,6 +97,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       canAddPages: true,
       isOnTaskBar: false,
       iconUrl: "/icons/folder.png",
+      children: [...wallpapers],
     },
     {
       ...template,

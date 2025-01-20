@@ -8,6 +8,11 @@ export type AppNameType =
   | "vsCode"
   | string;
 
+export interface FileType {
+  type: "picture";
+  name: AppNameType;
+  iconUrl: string;
+}
 export interface AppType {
   name: AppNameType;
   isDir: boolean;
@@ -18,11 +23,13 @@ export interface AppType {
   isTempOnTaskBar: boolean;
   isOnBothDeskTopAndTaskBar: boolean;
   iconUrl: string;
-  children?: AppType[];
+  children?: AppType[] | FileType[];
 }
 
 export interface FileManagerType {
   apps: AppType[];
+  wallpaper: string;
+  setWallpaper: (wallpaperName: string) => void;
   handleOpenApp: (appName: AppNameType) => void;
   handleCloseApp: (appName: AppNameType) => void;
   handleMinimizeApp: (appName: AppNameType) => void;

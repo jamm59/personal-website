@@ -1,7 +1,7 @@
 import { useFileMangerStore } from "@/store/data";
 import { FileManagerType, AppType } from "..";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export default function BottomTaskBar() {
   const handleOpenApp = useFileMangerStore(
@@ -45,14 +45,16 @@ export default function BottomTaskBar() {
     }
   };
 
+  useEffect(() => {
+    document.addEventListener("click", hideTaskBarContextMenu);
+    return () => document.removeEventListener("click", hideTaskBarContextMenu);
+  }, []);
+
   const excludedApps: string[] = ["Start", "Task View"];
 
   const currentTime: Date = new Date();
   return (
-    <footer
-      onClick={hideTaskBarContextMenu}
-      className="z-20 select-none dark:bg-[rgba(0,0,0,0.6)]  bg-[rgba(255,255,255,0.7)] h-[3.5rem] absolute bottom-0 left-0 right-0 p-4 flex sm:justify-start justify-center gap-1 items-center"
-    >
+    <footer className="z-20 select-none dark:bg-[rgba(0,0,0,0.5)] bg-[rgba(255,255,255,0.7)] h-[3.5rem] absolute bottom-0 left-0 right-0 p-4 flex sm:justify-start justify-center gap-1 items-center">
       {apps.map((app: AppType, idx: number) => (
         <div key={idx} className="relative">
           <button

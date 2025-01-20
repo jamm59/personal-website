@@ -262,6 +262,9 @@ const WindowsRightClick = () => {
 
     if (e.pageX >= pageWidth - limitX && e.pageY >= pageHeight - limitY) {
       setMenuPosition({ x: e.pageX - 300, y: e.pageY - limitY + 70 });
+    } else if (e.pageY >= pageHeight - 180) {
+      setMenuPosition({ x: 0, y: 0 });
+      setMenuVisible(false);
     } else if (e.pageX >= pageWidth - limitX) {
       console.log(e.pageX, pageWidth);
       setMenuPosition({ x: e.pageX - 300, y: e.pageY });
@@ -328,10 +331,10 @@ const WindowsRightClick = () => {
   );
 
   return (
-    <div className="font-openSans flex items-center justify-center overflow-hidden z-50">
+    <div className="font-openSans flex items-center justify-center overflow-hidden z-20">
       {menuVisible && (
         <div
-          className="absolute bg-[rgba(255,255,255,0.9)] rounded-md shadow-md border w-72 text-sm text-gray-800"
+          className="absolute bg-[rgba(255,255,255,0.9)] z-30 rounded-md shadow-md border w-72 text-sm text-gray-800"
           style={{ top: menuPosition.y, left: menuPosition.x }}
         >
           {Object.entries(menuItems).map(([group, items], groupIdx) => (

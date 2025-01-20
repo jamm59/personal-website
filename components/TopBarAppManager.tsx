@@ -78,7 +78,6 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
     >
       <div
         ref={ref}
-        onMouseDown={handleMouseDown}
         style={{
           backgroundColor: backgroundColor,
           width: isMaximized ? customWindowWidth : "900px",
@@ -86,7 +85,10 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
         className="z-20 relative aspect-video backdrop:blur-md rounded-md overflow-hidden"
       >
         <div className="grid grid-cols-4">
-          <div className="col-span-3 pt-1 pl-1 flex">
+          <div
+            onMouseDown={handleMouseDown}
+            className="col-span-3 pt-1 pl-1 flex"
+          >
             <div
               style={{
                 backgroundColor: app.canAddPages ? bgColor : "",
