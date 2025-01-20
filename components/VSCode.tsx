@@ -78,7 +78,11 @@ export default function CodeEditor({ app }: CodeEditorType) {
                     setCodeLanguage(file.language);
                   }}
                   key={idx}
-                  className="border-r-[1px] border-[rgba(0,0,0,0.1)] flex h-full justify-around items-center gap-x-3 text-black transition-all duration-200 ease-out hover:bg-[rgba(0,0,0,0.1)] font-openSans text-sm px-4 py-1"
+                  style={{
+                    backgroundColor:
+                      file.language === codeLanguage ? "white" : "",
+                  }}
+                  className="shadow-inner border-r-[1px] border-[rgba(0,0,0,0.1)] flex h-full justify-around items-center gap-x-3 text-black transition-all duration-200 ease-out hover:bg-[rgba(0,0,0,0.1)] font-openSans text-sm px-4 py-1"
                 >
                   <span>{file.name}</span>
                   <img

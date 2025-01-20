@@ -10,6 +10,7 @@ const template: AppType = {
   canAddPages: false,
   isTempOnTaskBar: false,
   isOnBothDeskTopAndTaskBar: false,
+  showApp: true,
   iconUrl: "/icons/windows.png",
 };
 
@@ -30,6 +31,19 @@ const wallpapers: FileType[] = [
     iconUrl: "/icons/photo.png",
   },
 ];
+const aboutAuthor: FileType[] = [
+  {
+    type: "pdf",
+    name: "cv.pdf",
+    iconUrl: "/icons/photo.png",
+  },
+  {
+    type: "text",
+    name: "credits.txt",
+    iconUrl: "/icons/photo.png",
+  },
+];
+
 export const useFileMangerStore = create<FileManagerType>((set) => ({
   apps: [
     {
@@ -73,6 +87,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
     {
       ...template,
       name: "Recycle Bin",
+      isDir: true,
       isOnTaskBar: false,
       canAddPages: true,
       iconUrl: "/icons/recycle-bin.png",
@@ -84,6 +99,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       isOnTaskBar: false,
       canAddPages: true,
       iconUrl: "/icons/folder.png",
+      children: [...aboutAuthor],
     },
     {
       ...template,
@@ -92,15 +108,30 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
       canAddPages: true,
       isOnTaskBar: false,
       iconUrl: "/icons/folder.png",
-      children: [...wallpapers.map((file: FileType) => ({ ...file }))],
+      children: [...wallpapers],
     },
     {
       ...template,
       name: "Terminal",
-      isDir: false,
       isOnTaskBar: false,
       canAddPages: true,
       iconUrl: "/icons/terminal.png",
+    },
+    {
+      ...template,
+      name: "Pdf Viewer",
+      isOnTaskBar: false,
+      canAddPages: true,
+      showApp: null,
+      iconUrl: "/icons/pdf.png",
+    },
+    {
+      ...template,
+      name: "Text Viewer",
+      isOnTaskBar: false,
+      canAddPages: true,
+      showApp: null,
+      iconUrl: "/icons/document.png",
     },
   ],
   wallpaper: "wallpaper-purple.jpg",

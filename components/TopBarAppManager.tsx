@@ -94,7 +94,7 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
                 backgroundColor: app.canAddPages ? bgColor : "",
                 color: app.canAddPages ? titleColor : "black",
               }}
-              className="p-1 select-none font-sans text-sm font-semibold w-[40%] rounded-t-md h-full flex justify-between px-3 items-center"
+              className="p-1 select-none font-sans text-sm font-semibold w-[35%] rounded-t-md h-full flex justify-between pl-2 items-center"
             >
               <AppIcon />
               <span className="mr-auto ml-2 ">{app.name}</span>

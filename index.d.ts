@@ -9,7 +9,7 @@ export type AppNameType =
   | string;
 
 export interface FileType {
-  type: "image" | "folder" | "pdf";
+  type: "image" | "folder" | "pdf" | "text";
   name: AppNameType;
   iconUrl: string;
   parent?: AppType;
@@ -18,6 +18,7 @@ export interface AppType {
   name: AppNameType;
   isDir: boolean;
   isOpen: boolean;
+  showApp: boolean | null;
   isMinimized: boolean;
   isOnTaskBar: boolean;
   canAddPages: boolean;

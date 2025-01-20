@@ -22,7 +22,8 @@ export default function DesktopApps() {
     <div className="z-20 relative h-full w-fit min-w-[10%] px-8 pb-10 pt-5 flex flex-wrap gap-y-4 gap-x-5 justify-start flex-col items-start">
       {apps
         .filter(
-          (app: AppType) => !app.isOnTaskBar || app.isOnBothDeskTopAndTaskBar
+          (app: AppType) =>
+            app.isOnBothDeskTopAndTaskBar || (!app.isOnTaskBar && app.showApp)
         )
         .map((app: AppType, idx: number) => {
           return (

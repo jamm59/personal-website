@@ -85,7 +85,7 @@ export default function StartWindow({ app }: { app: AppType }) {
                 />
               </button>
             </div>
-            <div className="h-full w-full flex flex-wrap justify-center items-center gap-2 px-3">
+            <div className="h-full w-full flex flex-wrap justify-center items-center gap-2 px-6">
               {apps
                 .filter(
                   (app: AppType) =>
