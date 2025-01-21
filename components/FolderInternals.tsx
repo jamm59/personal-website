@@ -20,8 +20,8 @@ export default function FolderInternals({ app }: { app: AppType }) {
       case "image":
         return (
           <td
-            className="p-1 flex items-center gap-2 text-xs"
-            onDoubleClick={() => setWallpaper(child.name)}
+            className="p-1 flex items-center gap-2"
+            onClick={() => setWallpaper(child.name)}
           >
             <img width="24" height="24" src={child.iconUrl} alt="folder-icon" />
             <span>{child.name}</span>
@@ -31,11 +31,10 @@ export default function FolderInternals({ app }: { app: AppType }) {
       case "pdf":
         return (
           <td
-            className="p-1 flex items-center gap-2 text-xs"
-            onDoubleClick={() => {
-              handleOpenApp(childType === "pdf" ? "Pdf Viewer" : "");
-              alert("something");
-            }}
+            className="p-1 flex items-center gap-2"
+            onClick={() =>
+              handleOpenApp(childType === "pdf" ? "Pdf Viewer" : "")
+            }
           >
             <img
               width="24"
@@ -50,8 +49,8 @@ export default function FolderInternals({ app }: { app: AppType }) {
       case "text":
         return (
           <td
-            className="p-1 flex items-center gap-2 text-xs"
-            onDoubleClick={() =>
+            className="p-1 flex items-center gap-2"
+            onClick={() =>
               handleOpenApp(childType === "text" ? "Text Viewer" : "")
             }
           >
@@ -67,10 +66,7 @@ export default function FolderInternals({ app }: { app: AppType }) {
 
       case "folder":
         return (
-          <td
-            className="p-1 flex items-center gap-2 text-xs"
-            onDoubleClick={() => {}}
-          >
+          <td className="p-1 flex items-center gap-2" onDoubleClick={() => {}}>
             <img width="20" height="20" src={child.iconUrl} alt="folder-icon" />
             <span>{child.name}</span>
           </td>
@@ -103,7 +99,10 @@ export default function FolderInternals({ app }: { app: AppType }) {
           {app.children && app.children.length > 0 ? (
             app.children.map((child: FileType | AppType, idx: number) => (
               <tbody key={idx}>
-                <tr key={idx} className="hover:bg-[rgba(255,255,255,0.2)]">
+                <tr
+                  key={idx}
+                  className="hover:bg-[rgba(255,255,255,0.2)] text-xs"
+                >
                   <HandleSubFileOrFolderIcons child={child} />
                   <td className="p-1">{getFormattedDate()}</td>
                   <td className="p-1">{(child as FileType).type ?? ""}</td>

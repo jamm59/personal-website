@@ -156,7 +156,8 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
         return {
           ...app,
           isOpen: app.name === appName ? true : app.isOpen,
-          stackLevel: defaultStackLevel,
+          stackLevel:
+            app.name === appName ? defaultStackLevel + 30 : defaultStackLevel,
         };
       });
 
@@ -232,11 +233,15 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
 
   handleUpdateStackZIndexLevel: (appName: AppNameType) =>
     set((state) => {
-      const updatedApps = state.apps.map((app) =>
-        app.name === appName
-          ? { ...app, stackLevel: defaultStackLevel + 30 }
-          : { ...app, stackLevel: defaultStackLevel }
-      );
+      const updatedApps = state.apps.map((app) => {
+        if (app.name === "Start")
+          return { ...app, isOpen: false, stackLevel: defaultStackLevel };
+
+        if (app.name === appName)
+          return { ...app, stackLevel: defaultStackLevel + 30 };
+
+        return { ...app, stackLevel: defaultStackLevel };
+      });
 
       return { apps: updatedApps };
     }),

@@ -125,7 +125,7 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
               )}
             </div>
           </div>
-          <div className="flex justify-enditems-center opacity-70 select-none">
+          <div className="flex justify-end items-center opacity-70 select-none">
             <button
               onClick={() => handleMinimizeApp()}
               className="h-full flex justify-center items-center w-12 hover:bg-[rgba(0,0,0,0.1)] transition-all duration-100"

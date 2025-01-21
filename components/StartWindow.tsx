@@ -1,12 +1,11 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { useFileMangerStore } from "@/store/data";
 import { FileManagerType, AppType, AppNameType } from "..";
 import Image from "next/image";
 import { stringPadding } from "@/utils/methods";
 
 export default function StartWindow({ app }: { app: AppType }) {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
   const ref = useRef<HTMLDivElement>(null);
   const apps = useFileMangerStore<AppType[]>(
     (state: FileManagerType) => state.apps
@@ -26,14 +25,16 @@ export default function StartWindow({ app }: { app: AppType }) {
   ];
 
   useEffect(() => {
+    // Handling the opening and closing of the app here after the "StartWindow" component mounts
     if (ref.current) {
       if (app.isOpen) {
         ref.current.style.bottom = "4.5rem";
-      } else {
+      }
+      if (app.isMinimized || !app.isOpen) {
         ref.current.style.bottom = "-40rem";
       }
     }
-  }, [ref, app]);
+  });
 
   const handleOpenApp = useFileMangerStore(
     (state: FileManagerType) => state.handleOpenApp
@@ -47,7 +48,6 @@ export default function StartWindow({ app }: { app: AppType }) {
     <div
       className="select-none absolute inset-0 grid place-items-center"
       onClick={() => {
-        setIsOpen(false);
         if (ref.current) ref.current.style.bottom = "-40rem";
         handleCloseApp("Start");
       }}
@@ -58,7 +58,7 @@ export default function StartWindow({ app }: { app: AppType }) {
           zIndex: app.stackLevel,
           bottom: "-40rem",
         }}
-        className="absolute bottom-0 transition-all ease-in-out duration-300 bg-[rgba(255,255,255,0.4)] backdrop-blur-md overflow-hidden dark:bg-[rgba(0,0,0,0.4)] rounded-md h-[600px] w-[600px]"
+        className="absolute bottom-0 transition-all ease-in-out duration-200 bg-[rgba(255,255,255,0.4)] backdrop-blur-md overflow-hidden dark:bg-[rgba(0,0,0,0.4)] rounded-md h-[600px] w-[600px]"
       >
         <div className="h-full">
           <div className="h-[10%] grid place-items-center px-10">
