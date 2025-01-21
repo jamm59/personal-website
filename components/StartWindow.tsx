@@ -26,8 +26,12 @@ export default function StartWindow({ app }: { app: AppType }) {
   ];
 
   useEffect(() => {
-    if (ref.current && app.isOpen) {
-      ref.current.style.bottom = "4.5rem";
+    if (ref.current) {
+      if (app.isOpen) {
+        ref.current.style.bottom = "4.5rem";
+      } else {
+        ref.current.style.bottom = "-40rem";
+      }
     }
   }, [ref, app]);
 
@@ -51,6 +55,7 @@ export default function StartWindow({ app }: { app: AppType }) {
       <div
         ref={ref}
         style={{
+          zIndex: app.stackLevel,
           bottom: "-40rem",
         }}
         className="absolute bottom-0 transition-all ease-in-out duration-300 bg-[rgba(255,255,255,0.4)] backdrop-blur-md overflow-hidden dark:bg-[rgba(0,0,0,0.4)] rounded-md h-[600px] w-[600px]"

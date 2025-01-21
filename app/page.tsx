@@ -41,15 +41,9 @@ function LockScreen() {
         }}
         className="absolute p-1 bg-[rgba(0,0,0,0.9)] inset-0 z-[100] transition-all duration-500 ease-out"
       >
-        <div
-          // style={{
-          //   backgroundImage: "url('/images/lockscreen.jpg')",
-          // }}
-          className="hover:cursor-pointer rounded-lg bg-[rgba(255,255,255,0.1)] text-gray-900 w-full h-full bg-cover flex justify-center items-center"
-        >
-          <div className="w-[700px] aspect-video text-white flex flex-col justify-start items-center rounded-lg backdrop-blur-md">
-            <h1 className="w-full text-center font-black text-[120px] font-alphaSlabOne tracking-wider">
-              {" "}
+        <div className="hover:cursor-pointer rounded-lg bg-[rgba(255,255,255,0.1)] text-gray-900 w-full h-full bg-cover flex justify-center items-center">
+          <div className="w-[700px] aspect-video text-white flex flex-col justify-start items-center rounded-lg">
+            <h1 className="w-full text-center font-black text-[120px] md:text-[100px] sm:text-[80px] font-alphaSlabOne tracking-wider">
               {currentTime.getHours() < 10
                 ? "0" + currentTime.getHours()
                 : currentTime.getHours()}

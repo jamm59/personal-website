@@ -14,7 +14,6 @@ interface TopBarAppManagerType {
 const TopBarAppManager = (props: TopBarAppManagerType) => {
   const { app, children, titleColor, bgColor, AppIcon } = props;
   // constants and variables
-  const foregroundColor: string = "rgba(255,255,255,0.1)";
   const backgroundColor: string = "rgba(255,255,255,0.7)";
   const customWindowWidth: string = "80%";
 
@@ -28,6 +27,10 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
 
   const handleAddAppToTaskBar = useFileMangerStore(
     (state: FileManagerType) => state.handleAddAppToTaskBar
+  );
+
+  const handleUpdateStackZIndexLevel = useFileMangerStore(
+    (state: FileManagerType) => state.handleUpdateStackZIndexLevel
   );
 
   // components states and references
@@ -72,6 +75,7 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
 
   return (
     <div
+      key={app.name}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
       className="select-none absolute inset-0 grid place-items-center"
@@ -79,15 +83,17 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
       <div
         ref={ref}
         style={{
+          zIndex: app.stackLevel,
           backgroundColor: backgroundColor,
           width: isMaximized ? customWindowWidth : "900px",
         }}
-        className="z-20 relative aspect-video backdrop:blur-md rounded-md overflow-hidden"
+        onClick={() => handleUpdateStackZIndexLevel(app.name)}
+        className="relative aspect-video backdrop:blur-md rounded-md overflow-hidden"
       >
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-6">
           <div
             onMouseDown={handleMouseDown}
-            className="col-span-3 pt-1 pl-1 flex"
+            className="col-span-5 pt-1 pl-1 flex"
           >
             <div
               style={{
@@ -119,7 +125,7 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
               )}
             </div>
           </div>
-          <div className="flex justify-end items-center opacity-70 select-none">
+          <div className="flex justify-enditems-center opacity-70 select-none">
             <button
               onClick={() => handleMinimizeApp()}
               className="h-full flex justify-center items-center w-12 hover:bg-[rgba(0,0,0,0.1)] transition-all duration-100"

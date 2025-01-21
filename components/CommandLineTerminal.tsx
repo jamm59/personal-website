@@ -58,10 +58,10 @@ Install the latest PowerShell for new features and improvements! https://aka.ns/
         bgColor={terminalColor}
         AppIcon={() => (
           <img
-            width="20"
-            height="20"
-            src="https://img.icons8.com/fluency/48/powershell.png"
-            alt="powershell"
+            width="24"
+            height="24"
+            src="https://img.icons8.com/fluency/48/console.png"
+            alt="console"
           />
         )}
       >

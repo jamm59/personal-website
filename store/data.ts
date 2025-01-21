@@ -1,10 +1,15 @@
 import { create } from "zustand";
 import { AppNameType, AppType, FileManagerType, FileType } from "..";
 
+// constants
+const defaultStackLevel: number = 20;
+
+// default template
 const template: AppType = {
   name: "None",
   isDir: false,
   isOpen: false,
+  stackLevel: defaultStackLevel,
   isMinimized: false,
   isOnTaskBar: true,
   canAddPages: false,
@@ -14,6 +19,7 @@ const template: AppType = {
   iconUrl: "/icons/windows.png",
 };
 
+// children type
 const wallpapers: FileType[] = [
   {
     type: "image",
@@ -31,6 +37,7 @@ const wallpapers: FileType[] = [
     iconUrl: "/icons/photo.png",
   },
 ];
+
 const aboutAuthor: FileType[] = [
   {
     type: "pdf",
@@ -44,6 +51,7 @@ const aboutAuthor: FileType[] = [
   },
 ];
 
+// main object state
 export const useFileMangerStore = create<FileManagerType>((set) => ({
   apps: [
     {
@@ -142,10 +150,14 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
   handleOpenApp: (appName: AppNameType) =>
     set((state) => {
       const updatedApps = state.apps.map((app) => {
-        if (appName != "Start" && app.name === "Start")
-          return { ...app, isOpen: false };
-        if (app.name === appName) return { ...app, isOpen: true };
-        return app;
+        if (app.name === "Start" && app.name !== appName && app.isOpen) {
+          return { ...app, isOpen: false, stackLevel: defaultStackLevel };
+        }
+        return {
+          ...app,
+          isOpen: app.name === appName,
+          stackLevel: defaultStackLevel,
+        };
       });
 
       return { apps: updatedApps };
@@ -213,6 +225,17 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
     set((state) => {
       const updatedApps = state.apps.map((app) =>
         app.name === appName ? { ...app, isOnTaskBar: pinOrUnpin } : app
+      );
+
+      return { apps: updatedApps };
+    }),
+
+  handleUpdateStackZIndexLevel: (appName: AppNameType) =>
+    set((state) => {
+      const updatedApps = state.apps.map((app) =>
+        app.name === appName
+          ? { ...app, stackLevel: defaultStackLevel + 30 }
+          : { ...app, stackLevel: defaultStackLevel }
       );
 
       return { apps: updatedApps };

@@ -1,6 +1,7 @@
 "use client";
 import { AppType, FileType, FileManagerType } from "..";
 import { useFileMangerStore } from "@/store/data";
+import { getFormattedDate } from "@/utils/methods";
 
 export default function FolderInternals({ app }: { app: AppType }) {
   const setWallpaper = useFileMangerStore(
@@ -31,9 +32,10 @@ export default function FolderInternals({ app }: { app: AppType }) {
         return (
           <td
             className="p-1 flex items-center gap-2 text-xs"
-            onDoubleClick={() =>
-              handleOpenApp(childType === "pdf" ? "Pdf Viewer" : "")
-            }
+            onDoubleClick={() => {
+              handleOpenApp(childType === "pdf" ? "Pdf Viewer" : "");
+              alert("something");
+            }}
           >
             <img
               width="24"
@@ -103,7 +105,7 @@ export default function FolderInternals({ app }: { app: AppType }) {
               <tbody key={idx}>
                 <tr key={idx} className="hover:bg-[rgba(255,255,255,0.2)]">
                   <HandleSubFileOrFolderIcons child={child} />
-                  <td className="p-1">{new Date().toISOString()}</td>
+                  <td className="p-1">{getFormattedDate()}</td>
                   <td className="p-1">{(child as FileType).type ?? ""}</td>
                   <td className="p-1">{"-"}</td>
                 </tr>

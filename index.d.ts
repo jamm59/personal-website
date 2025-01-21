@@ -18,6 +18,7 @@ export interface AppType {
   name: AppNameType;
   isDir: boolean;
   isOpen: boolean;
+  stackLevel: number;
   showApp: boolean | null;
   isMinimized: boolean;
   isOnTaskBar: boolean;
@@ -37,6 +38,7 @@ export interface FileManagerType {
   handleMinimizeApp: (appName: AppNameType) => void;
   handleCreateNewFolder: () => void;
   handleAddAppToTaskBar: (appName: AppNameType, isOnTaskBar: boolean) => void;
+  handleUpdateStackZIndexLevel: (appName: AppNameType) => void;
   handlePinAndUnpinTaskBarApps: (
     appName: AppNameType,
     pinOrUnpin: boolean
