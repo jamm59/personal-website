@@ -155,7 +155,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
         }
         return {
           ...app,
-          isOpen: app.name === appName,
+          isOpen: app.name === appName ? true : app.isOpen,
           stackLevel: defaultStackLevel,
         };
       });
