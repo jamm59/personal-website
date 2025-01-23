@@ -21,7 +21,7 @@ export default function FolderInternals({ app }: { app: AppType }) {
         return (
           <td
             className="p-1 flex items-center gap-2"
-            onClick={() => setWallpaper(child.name)}
+            onDoubleClick={() => setWallpaper(child.name)}
           >
             <img width="24" height="24" src={child.iconUrl} alt="folder-icon" />
             <span>{child.name}</span>
@@ -32,7 +32,7 @@ export default function FolderInternals({ app }: { app: AppType }) {
         return (
           <td
             className="p-1 flex items-center gap-2"
-            onClick={() =>
+            onDoubleClick={() =>
               handleOpenApp(childType === "pdf" ? "Pdf Viewer" : "")
             }
           >
@@ -50,7 +50,7 @@ export default function FolderInternals({ app }: { app: AppType }) {
         return (
           <td
             className="p-1 flex items-center gap-2"
-            onClick={() =>
+            onDoubleClick={() =>
               handleOpenApp(childType === "text" ? "Text Viewer" : "")
             }
           >

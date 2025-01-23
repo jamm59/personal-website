@@ -1,7 +1,7 @@
 import { useFileMangerStore } from "@/store/data";
 import { FileManagerType, AppType } from "..";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function BottomTaskBar() {
   const handleOpenApp = useFileMangerStore(
@@ -22,22 +22,26 @@ export default function BottomTaskBar() {
     (state: FileManagerType) => state.apps
   );
 
-  const ref = useRef<any>([]);
+  const appRef = useRef<any>([]);
+
+  const popupRef = useRef(null);
+
+  const [sidePopUpIsOpen, setSidePopUpIsOpen] = useState<boolean>(false);
 
   const handleContextMenu = (event: any, idx: number) => {
     event.preventDefault();
-    if (ref.current[idx]) {
-      ref.current[idx].classList.remove("hidden");
-      ref.current[idx].classList.add("flex");
+    if (appRef.current[idx]) {
+      appRef.current[idx].classList.remove("hidden");
+      appRef.current[idx].classList.add("flex");
 
       for (let i = 0; i < apps.length; i++) {
         if (
           i !== idx &&
-          ref.current[i] &&
-          ref.current[i].classList.contains("flex")
+          appRef.current[i] &&
+          appRef.current[i].classList.contains("flex")
         ) {
-          ref.current[i].classList.add("hidden");
-          ref.current[i].classList.remove("flex");
+          appRef.current[i].classList.add("hidden");
+          appRef.current[i].classList.remove("flex");
         }
       }
     }
@@ -45,9 +49,9 @@ export default function BottomTaskBar() {
   const hideTaskBarContextMenu = (event: any) => {
     event.preventDefault();
     for (let i = 0; i < apps.length; i++) {
-      if (ref.current[i] && ref.current[i].classList.contains("flex")) {
-        ref.current[i].classList.add("hidden");
-        ref.current[i].classList.remove("flex");
+      if (appRef.current[i] && appRef.current[i].classList.contains("flex")) {
+        appRef.current[i].classList.add("hidden");
+        appRef.current[i].classList.remove("flex");
       }
     }
   };
@@ -61,7 +65,7 @@ export default function BottomTaskBar() {
 
   const currentTime: Date = new Date();
   return (
-    <footer className="z-20 select-none dark:bg-[rgba(0,0,0,0.5)] bg-[rgba(255,255,255,0.7)] h-[3.5rem] absolute bottom-0 left-0 right-0 p-4 flex sm:justify-start justify-center gap-1 items-center">
+    <footer className="z-20 select-none dark:bg-[rgba(0,0,0,0.7)] bg-[rgba(255,255,255,0.7)] h-[3.5rem] absolute bottom-0 left-0 right-0 p-4 flex sm:justify-start justify-center gap-1 items-center">
       {apps
         .filter(
           (app: AppType) =>
@@ -102,7 +106,7 @@ export default function BottomTaskBar() {
               ></div>
             </button>
             <div
-              ref={(r: any) => (ref.current[idx] = r)}
+              ref={(r: any) => (appRef.current[idx] = r)}
               style={{
                 top: app.isOpen ? "-5.4rem" : "-4rem",
               }}
@@ -170,18 +174,204 @@ export default function BottomTaskBar() {
             </div>
           </div>
         ))}
-      <button className="absolute sm:hidden right-4 text-black dark:text-white p-3 min-w-fit w-[5rem] h-full flex flex-col justify-center items-end text-xs font-mono">
-        <span>
-          {currentTime.getHours() < 10
-            ? "0" + currentTime.getHours()
-            : currentTime.getHours()}
-          :
-          {currentTime.getMinutes() < 10
-            ? "0" + currentTime.getMinutes()
-            : currentTime.getMinutes()}
-        </span>
-        <span>{currentTime.toLocaleDateString()}</span>
-      </button>
+      <div className="absolute sm:hidden right-0 px-4 text-black dark:text-white py-3 w-[15rem] h-full flex justify-center items-center">
+        <button
+          onClick={() => setSidePopUpIsOpen(!sidePopUpIsOpen)}
+          className="min-w-fit p-2 gap-x-2 w-h-full w-1/2 flex justify-center items-center"
+        >
+          <SideWindowPopUp sidePopUpIsOpen={sidePopUpIsOpen} />
+          <div className="flex justify-center items-center">
+            <img
+              width="13"
+              height="13"
+              src="https://img.icons8.com/ios-filled/50/FFFFFF/collapse-arrow.png"
+              alt="collapse-arrow"
+            />
+          </div>
+          <div className="rounded-md transition-all duration-100 hover:bg-[rgba(255,255,255,0.1)] flex gap-x-2 p-2">
+            <img
+              width="20"
+              height="20"
+              src="https://img.icons8.com/windows/32/FFFFFF/wired-network-connection.png"
+              alt="wired-network-connection"
+            />
+            <img
+              width="20"
+              height="20"
+              src="https://img.icons8.com/windows/32/FFFFFF/speaker.png"
+              alt="speaker"
+            />
+            <img
+              width="20"
+              height="20"
+              src="https://img.icons8.com/fluency-systems-regular/50/FFFFFF/medium-battery.png"
+              alt="medium-battery"
+            />
+          </div>
+        </button>
+        <button className="min-w-fit w-h-full w-1/2 flex flex-col justify-center items-end font-mono text-xs">
+          <span>
+            {currentTime.getHours() < 10
+              ? "0" + currentTime.getHours()
+              : currentTime.getHours()}
+            :
+            {currentTime.getMinutes() < 10
+              ? "0" + currentTime.getMinutes()
+              : currentTime.getMinutes()}
+          </span>
+          <span>{currentTime.toLocaleDateString()}</span>
+        </button>
+      </div>
     </footer>
   );
 }
+
+const SideWindowPopUp = ({ sidePopUpIsOpen }: { sidePopUpIsOpen: boolean }) => {
+  return (
+    <div
+      style={{
+        top: sidePopUpIsOpen ? "-360px" : "360px",
+      }}
+      className="transition-all duration-200 ease-in-out bg-[rgba(0,0,0,0.6)] w-[20rem] left-[-90px] rounded-md min-h-fit h-[350px] overflow-hidden absolute text-sm p-2 flex flex-col justify-start items-center"
+    >
+      <div className="grid border-b-[1px] border-[rgba(255,255,255,0.1)] pb-2 grid-cols-3 grid-row-2 gap-2 py-4 h-1/2">
+        <div
+          className="rounded-md flex flex-col justify-center items-center gap-y-1
+            "
+        >
+          <div className="bg-[rgba(255,255,255,0.2)] w-full grid place-items-center h-full p-2 rounded-md">
+            <img
+              width="20"
+              height="20"
+              src="https://img.icons8.com/windows/32/FFFFFF/wired-network-connection.png"
+              alt="wired-network-connection"
+            />
+          </div>
+          <span>Wifi</span>
+        </div>
+        <div
+          className="rounded-md flex flex-col justify-center items-center gap-y-1
+            "
+        >
+          <div className="bg-[rgba(255,255,255,0.2)] w-full grid place-items-center h-full p-2 rounded-md">
+            <img
+              width="20"
+              height="20"
+              src="https://img.icons8.com/fluency-systems-filled/50/FFFFFF/bluetooth.png"
+              alt="bluetooth"
+            />
+          </div>
+          <span>Bluetooth</span>
+        </div>
+        <div
+          className="rounded-md flex flex-col justify-center items-center gap-y-1
+            "
+        >
+          <div className="bg-[rgba(255,255,255,0.2)] w-full grid place-items-center h-full p-2 rounded-md">
+            <img
+              width="20"
+              height="20"
+              src="https://img.icons8.com/windows/32/FFFFFF/airplane-mode-on.png"
+              alt="airplane-mode-on"
+            />
+          </div>
+          <span>Flight mode</span>
+        </div>
+        <div
+          className="rounded-md flex flex-col justify-center items-center gap-y-1
+            "
+        >
+          <div className="bg-[rgba(255,255,255,0.2)] w-full grid place-items-center h-full p-2 rounded-md">
+            <img
+              width="20"
+              height="20"
+              src="https://img.icons8.com/fluency-systems-regular/50/FFFFFF/battery-alert.png"
+              alt="battery-alert"
+            />
+          </div>
+          <span>Energy saver</span>
+        </div>
+        <div
+          className="rounded-md flex flex-col justify-center items-center gap-y-1
+            "
+        >
+          <div className="bg-[rgba(255,255,255,0.2)] w-full grid place-items-center h-full p-2 rounded-md">
+            <img
+              width="20"
+              height="20"
+              src="https://img.icons8.com/windows/32/FFFFFF/light-on.png"
+              alt="light-on"
+            />
+          </div>
+          <span>Night light</span>
+        </div>
+        <div
+          className="rounded-md flex flex-col justify-center items-center gap-y-1
+            "
+        >
+          <div className="bg-[rgba(255,255,255,0.2)] w-full grid place-items-center h-full p-2 rounded-md">
+            <img
+              width="20"
+              height="20"
+              src="https://img.icons8.com/windows/32/FFFFFF/accessibility2.png"
+              alt="accessibility2"
+            />
+          </div>
+          <span>Accessibility</span>
+        </div>
+      </div>
+      <div className="h-[40%] w-full flex p-2 flex-col justify-center items-center gap-y-5">
+        <div className="w-full flex justify-start gap-4 items-center">
+          <img
+            width="24"
+            height="24"
+            src="https://img.icons8.com/windows/32/FFFFFF/sun.png"
+            alt="sun"
+          />
+          <input
+            type="range"
+            id="brightness"
+            name="brightness"
+            min="0"
+            max="11"
+            className="w-full h-[0.3rem]"
+          />
+        </div>
+
+        <div className="w-full flex justify-start gap-4 items-center">
+          <img
+            width="24"
+            height="24"
+            src="https://img.icons8.com/windows/32/FFFFFF/medium-volume.png"
+            alt="medium-volume"
+          />
+          <input
+            type="range"
+            id="volume"
+            name="volume"
+            min="0"
+            max="11"
+            className="w-full h-[0.3rem]"
+          />
+        </div>
+      </div>
+      <div className="border-t-[1px] border-[rgba(255,255,255,0.1)] h-[2rem] w-full bottom-0 absolute flex justify-between items-center p-5 text-xs">
+        <div className="flex justify-center items-center gap-2">
+          <img
+            width="24"
+            height="24"
+            src="https://img.icons8.com/fluency-systems-regular/50/FFFFFF/medium-battery.png"
+            alt="medium-battery"
+          />
+          <span>78%</span>
+        </div>
+        <img
+          width="20"
+          height="20"
+          src="https://img.icons8.com/windows/32/FFFFFF/settings--v1.png"
+          alt="settings--v1"
+        />
+      </div>
+    </div>
+  );
+};

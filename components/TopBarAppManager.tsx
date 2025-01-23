@@ -35,6 +35,10 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
 
   // components states and references
   const [isMaximized, setIsMaximized] = useState<boolean>(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const [offsetX, setOffsetX] = useState<number>(0);
+  const [offsetY, setOffsetY] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   // callback functions
   const handleCloseApp = () => {
@@ -47,15 +51,10 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
   const handleMaximizeApp = () => {
     setIsMaximized(!isMaximized);
   };
-
-  const ref = useRef<HTMLDivElement>(null);
-  const [offsetX, setOffsetX] = useState<number>(0);
-  const [offsetY, setOffsetY] = useState<number>(0);
-  const [isDragging, setIsDragging] = useState(false);
-
   const handleMouseUp = () => {
     setIsDragging(false); // Stop dragging
   };
+
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (isDragging && ref.current) {
       ref.current.style.left = `${event.clientX - offsetX}px`;
@@ -84,6 +83,7 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
         ref={ref}
         style={{
           zIndex: app.stackLevel,
+          // transform: `translateY(${Math.random() * 10}px)`,
           backgroundColor: backgroundColor,
           width: isMaximized ? customWindowWidth : "900px",
         }}

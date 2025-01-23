@@ -3,21 +3,36 @@ import { Terminal } from "primereact/terminal";
 import { TerminalService } from "primereact/terminalservice";
 import { useEffect, useState } from "react";
 import TopBarAppManager from "./TopBarAppManager";
-import { AppType } from "..";
+import { useFileMangerStore } from "@/store/data";
+import { FileManagerType, AppType } from "..";
 export default function CustomTerminal({ app }: { app: AppType }) {
   const terminalColor: string = "#1A1A19";
+
+  const apps = useFileMangerStore<AppType[]>(
+    (state: FileManagerType) => state.apps
+  );
 
   const [welcomeMessage, setWelcomeMessage] =
     useState<string>(`Windows PowerShell 
 Copyright Microsoft Corporation. All rights reserved. 
 Install the latest PowerShell for new features and improvements! https://aka.ns/PSWindows.`);
+
   useEffect(() => {
-    // Add command listener
     const commandHandler = (commandText: string) => {
       let response;
 
-      // Define custom commands and responses
       switch (commandText.toLowerCase()) {
+        case "ls":
+          response = (
+            <div className="flex justify-start gap-5 item-center flex-wrap">
+              {apps.map(
+                (app: AppType, idx: number) =>
+                  !app.isOnTaskBar && <span key={idx}>{app.name}</span>
+              )}
+              <span></span>
+            </div>
+          );
+          break;
         case "help":
           response = (
             <div className="">{"Available commands: help, greet, clear"}</div>
@@ -30,8 +45,8 @@ Install the latest PowerShell for new features and improvements! https://aka.ns/
           break;
         case "clear":
           setWelcomeMessage("");
-          TerminalService.emit("clear"); // Clear terminal content
-          return; // Skip sending a response
+          TerminalService.emit("clear");
+          return;
         default:
           response = (
             <div className="">{`Unknown command: '${commandText}'`}</div>
