@@ -91,7 +91,7 @@ export default function FolderInternals({ app }: { app: AppType }) {
       <div className="col-span-4 grid p-3 grid-rows-6 min-h-fit w-full flex-col overflow-y-scroll">
         <table className="table-auto w-full border-collapse text-sm">
           <thead>
-            <tr className="font-semibold font-openSans">
+            <tr className="font-openSans font-semibold">
               <th className="text-left p-2 border-r-[1px] transition-all duration-100 ease-out hover:bg-[rgba(255,255,255,0.2)] border-[rgba(255,255,255,0.2)]">
                 Name
               </th>

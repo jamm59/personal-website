@@ -14,7 +14,7 @@ interface TopBarAppManagerType {
 const TopBarAppManager = (props: TopBarAppManagerType) => {
   const { app, children, titleColor, bgColor, AppIcon } = props;
   // constants and variables
-  const backgroundColor: string = "rgba(255,255,255,0.7)";
+  const backgroundColor: string = "rgba(0,0,0,0.6)";
   const customWindowWidth: string = "80%";
 
   // Global state
@@ -88,7 +88,7 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
           width: isMaximized ? customWindowWidth : "900px",
         }}
         onClick={() => handleUpdateStackZIndexLevel(app.name)}
-        className="relative aspect-video backdrop:blur-md rounded-md overflow-hidden"
+        className="relative aspect-video backdrop:blur-md rounded-md overflow-hidden backdrop-blur-lg"
       >
         <div className="grid grid-cols-6">
           <div
@@ -128,36 +128,36 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
           <div className="flex justify-end items-center opacity-70 select-none">
             <button
               onClick={() => handleMinimizeApp()}
-              className="h-full flex justify-center items-center w-12 hover:bg-[rgba(0,0,0,0.1)] transition-all duration-100"
+              className="h-full flex justify-center items-center w-12 hover:bg-[rgba(255,255,255,0.2)] transition-all duration-100"
             >
-              <Image
-                alt="minimize"
-                src={"/icons/minimize.png"}
-                width={10}
-                height={10}
-              ></Image>
+              <img
+                width="15"
+                height="15"
+                src="https://img.icons8.com/fluency-systems-regular/50/FFFFFF/horizontal-line.png"
+                alt="horizontal-line"
+              />
             </button>
             <button
               onClick={() => handleMaximizeApp()}
-              className="h-full flex justify-center items-center w-12 hover:bg-[rgba(0,0,0,0.1)] transition-all duration-100"
+              className="h-full flex justify-center items-center w-12 hover:bg-[rgba(255,255,255,0.2)] transition-all duration-100"
             >
-              <Image
-                alt="maximize"
-                src={"/icons/maximize.png"}
-                width={10}
-                height={10}
-              ></Image>
+              <img
+                width="15"
+                height="15"
+                src="https://img.icons8.com/fluency-systems-regular/50/FFFFFF/maximize-button.png"
+                alt="maximize-button"
+              />
             </button>
             <button
               onClick={() => handleCloseApp()}
               className="h-full flex justify-center items-center w-12 hover:bg-red-500 transition-all duration-100"
             >
-              <Image
-                alt="close"
-                src={"/icons/close.png"}
-                width={10}
-                height={10}
-              ></Image>
+              <img
+                width="15"
+                height="15"
+                src="https://img.icons8.com/fluency-systems-regular/50/FFFFFF/delete-sign--v1.png"
+                alt="delete-sign--v1"
+              />
             </button>
           </div>
         </div>

@@ -19,7 +19,7 @@ export function TextEditor({ app }: { app: AppType }) {
         )}
       >
         <div className="h-full w-full bg-zinc-900">
-          <div className="h-[2rem] flex justify-start items-center text-sm gap-4 pl-5 p-2 border-b-[1px] border-[rgba(0,0,0,0.1)]">
+          <div className="h-[2rem] flex justify-start items-center text-sm font-mono gap-4 pl-5 px-2 py-5 border-y-[1px] border-[rgba(255,255,255,0.1)]">
             <button>File</button>
             <button>Edit</button>
             <button>View</button>
@@ -28,7 +28,7 @@ export function TextEditor({ app }: { app: AppType }) {
             className="h-full bg-neutral-950 w-full p-3 focus:outline-none text-sm"
             value={`
               1. All icons used in this project were downloaded from Icons8[https://icons8.com/icons].
-              2. Wallpapers by uhdpaper[https://www.uhdpaper.com/]
+              2. Wallpapers from uhdpaper[https://www.uhdpaper.com/]
 
               `}
             onChange={() => {}}
