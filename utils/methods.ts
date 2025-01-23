@@ -1,4 +1,8 @@
-export const stringPadding = (input: string, maxLength: number): string => {
+export const stringPadding = (
+  input: string | null,
+  maxLength: number
+): string => {
+  if (input === null) return "";
   const stringLength = input.length;
   const difference = maxLength - stringLength;
 

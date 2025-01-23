@@ -19,12 +19,21 @@ export function TextEditor({ app }: { app: AppType }) {
         )}
       >
         <div className="h-full w-full bg-zinc-900">
-          <div className="h-[2rem] flex justify-start items-center text-sm gap-4 pl-3 font-semibold p-2 border-b-[1px] border-[rgba(0,0,0,0.1)]">
+          <div className="h-[2rem] flex justify-start items-center text-sm gap-4 pl-5 p-2 border-b-[1px] border-[rgba(0,0,0,0.1)]">
             <button>File</button>
             <button>Edit</button>
             <button>View</button>
           </div>
-          <textarea className="h-full bg-neutral-950 w-full p-3 focus:outline-none text-sm"></textarea>
+          <textarea
+            className="h-full bg-neutral-950 w-full p-3 focus:outline-none text-sm"
+            value={`
+              1. All icons used in this project were downloaded from Icons8[https://icons8.com/icons].
+              2. Wallpapers by uhdpaper[https://www.uhdpaper.com/]
+
+              `}
+            onChange={() => {}}
+            autoFocus
+          ></textarea>
         </div>
       </TopBarAppManager>
     </>

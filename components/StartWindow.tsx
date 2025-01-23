@@ -112,10 +112,10 @@ export default function StartWindow({ app }: { app: AppType }) {
                         height={40}
                       ></Image>
                       <span className="justify-center items-center group-focus:hidden flex font-openSans whitespace-nowrap w-[5rem] text-sm font-semibold p-1 text-white">
-                        {stringPadding(app.name, 11)}
+                        {stringPadding(app.launcher ?? app.name, 11)}
                       </span>
                       <span className="justify-center items-center group-focus:flex hidden font-openSans whitespace-nowrap w-[5rem] text-sm font-semibold p-1 text-white">
-                        {app.name}
+                        {app.launcher ?? app.name}
                       </span>
                     </button>
                   </div>

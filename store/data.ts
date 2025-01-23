@@ -7,6 +7,7 @@ const defaultStackLevel: number = 20;
 // default template
 const template: AppType = {
   name: "None",
+  launcher: null,
   isDir: false,
   isOpen: false,
   stackLevel: defaultStackLevel,
@@ -24,16 +25,19 @@ const wallpapers: FileType[] = [
   {
     type: "image",
     name: "wallpaper-purple.jpg",
+    launcher: "Image Viewer",
     iconUrl: "/icons/photo.png",
   },
   {
     type: "image",
     name: "wallpaper-nun.jpg",
+    launcher: "Image Viewer",
     iconUrl: "/icons/photo.png",
   },
   {
     type: "image",
     name: "wallpaper-black.jpg",
+    launcher: "Image Viewer",
     iconUrl: "/icons/photo.png",
   },
 ];
@@ -42,11 +46,7 @@ const aboutAuthor: FileType[] = [
   {
     type: "pdf",
     name: "cv.pdf",
-    iconUrl: "/icons/photo.png",
-  },
-  {
-    type: "text",
-    name: "credits.txt",
+    launcher: "Pdf Viewer",
     iconUrl: "/icons/photo.png",
   },
 ];
@@ -128,17 +128,18 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
     {
       ...template,
       name: "Pdf Viewer",
+      launcher: "Pdf Viewer",
       isOnTaskBar: false,
       canAddPages: true,
-      showApp: null,
+      showApp: false,
       iconUrl: "/icons/pdf.png",
     },
     {
       ...template,
-      name: "Text Viewer",
+      name: "credits.txt",
+      launcher: "Text Viewer",
       isOnTaskBar: false,
       canAddPages: true,
-      showApp: null,
       iconUrl: "/icons/document.png",
     },
   ],
@@ -149,13 +150,20 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
     }),
   handleOpenApp: (appName: AppNameType) =>
     set((state) => {
+      if (appName === "Pdf Viewer") {
+        window.open("/files/cv.pdf");
+        return { ...state };
+      }
       const updatedApps = state.apps.map((app) => {
         if (app.name === "Start" && app.name !== appName && app.isOpen) {
           return { ...app, isOpen: false, stackLevel: defaultStackLevel };
         }
         return {
           ...app,
-          isOpen: app.name === appName ? true : app.isOpen,
+          isOpen:
+            app.name === appName || app.launcher === appName
+              ? true
+              : app.isOpen,
           stackLevel:
             app.name === appName ? defaultStackLevel + 30 : defaultStackLevel,
         };

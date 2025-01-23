@@ -11,15 +11,17 @@ export type AppNameType =
 export interface FileType {
   type: "image" | "folder" | "pdf" | "text";
   name: AppNameType;
+  launcher: "Text Viewer" | "Pdf Viewer" | "Image Viewer";
   iconUrl: string;
   parent?: AppType;
 }
 export interface AppType {
   name: AppNameType;
+  launcher: AppNameType | null;
   isDir: boolean;
   isOpen: boolean;
   stackLevel: number;
-  showApp: boolean | null;
+  showApp: boolean;
   isMinimized: boolean;
   isOnTaskBar: boolean;
   canAddPages: boolean;

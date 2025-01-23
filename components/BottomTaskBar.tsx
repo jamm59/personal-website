@@ -24,8 +24,6 @@ export default function BottomTaskBar() {
 
   const appRef = useRef<any>([]);
 
-  const popupRef = useRef(null);
-
   const [sidePopUpIsOpen, setSidePopUpIsOpen] = useState<boolean>(false);
 
   const handleContextMenu = (event: any, idx: number) => {
@@ -69,9 +67,7 @@ export default function BottomTaskBar() {
       {apps
         .filter(
           (app: AppType) =>
-            app.isOnTaskBar ||
-            app.isOpen ||
-            (app.isOpen && app.showApp === null)
+            app.isOnTaskBar || app.isOpen || (app.isOpen && !app.showApp)
         )
         .map((app: AppType, idx: number) => (
           <div key={idx} className="relative">
@@ -239,7 +235,7 @@ const SideWindowPopUp = ({ sidePopUpIsOpen }: { sidePopUpIsOpen: boolean }) => {
           className="rounded-md flex flex-col justify-center items-center gap-y-1
             "
         >
-          <div className="bg-[rgba(255,255,255,0.2)] w-full grid place-items-center h-full p-2 rounded-md">
+          <div className="bg-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.1)] w-full grid place-items-center h-full p-2 rounded-md">
             <img
               width="20"
               height="20"
@@ -253,7 +249,7 @@ const SideWindowPopUp = ({ sidePopUpIsOpen }: { sidePopUpIsOpen: boolean }) => {
           className="rounded-md flex flex-col justify-center items-center gap-y-1
             "
         >
-          <div className="bg-[rgba(255,255,255,0.2)] w-full grid place-items-center h-full p-2 rounded-md">
+          <div className="bg-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.1)] w-full grid place-items-center h-full p-2 rounded-md">
             <img
               width="20"
               height="20"
@@ -267,7 +263,7 @@ const SideWindowPopUp = ({ sidePopUpIsOpen }: { sidePopUpIsOpen: boolean }) => {
           className="rounded-md flex flex-col justify-center items-center gap-y-1
             "
         >
-          <div className="bg-[rgba(255,255,255,0.2)] w-full grid place-items-center h-full p-2 rounded-md">
+          <div className="bg-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.1)] w-full grid place-items-center h-full p-2 rounded-md">
             <img
               width="20"
               height="20"
@@ -281,7 +277,7 @@ const SideWindowPopUp = ({ sidePopUpIsOpen }: { sidePopUpIsOpen: boolean }) => {
           className="rounded-md flex flex-col justify-center items-center gap-y-1
             "
         >
-          <div className="bg-[rgba(255,255,255,0.2)] w-full grid place-items-center h-full p-2 rounded-md">
+          <div className="bg-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.1)] w-full grid place-items-center h-full p-2 rounded-md">
             <img
               width="20"
               height="20"
@@ -295,7 +291,7 @@ const SideWindowPopUp = ({ sidePopUpIsOpen }: { sidePopUpIsOpen: boolean }) => {
           className="rounded-md flex flex-col justify-center items-center gap-y-1
             "
         >
-          <div className="bg-[rgba(255,255,255,0.2)] w-full grid place-items-center h-full p-2 rounded-md">
+          <div className="bg-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.1)] w-full grid place-items-center h-full p-2 rounded-md">
             <img
               width="20"
               height="20"
@@ -309,7 +305,7 @@ const SideWindowPopUp = ({ sidePopUpIsOpen }: { sidePopUpIsOpen: boolean }) => {
           className="rounded-md flex flex-col justify-center items-center gap-y-1
             "
         >
-          <div className="bg-[rgba(255,255,255,0.2)] w-full grid place-items-center h-full p-2 rounded-md">
+          <div className="bg-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.1)] w-full grid place-items-center h-full p-2 rounded-md">
             <img
               width="20"
               height="20"

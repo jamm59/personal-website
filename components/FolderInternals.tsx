@@ -15,13 +15,19 @@ export default function FolderInternals({ app }: { app: AppType }) {
   }: {
     child: FileType | AppType;
   }) => {
-    const childType = (child as FileType).type;
+    const handleDoubleClick = (event: any, func: () => void) => {
+      if (event.detail === 2) {
+        func();
+      }
+    };
     switch ((child as FileType).type) {
       case "image":
         return (
           <td
-            className="p-1 flex items-center gap-2"
-            onDoubleClick={() => setWallpaper(child.name)}
+            onClick={(event: any) =>
+              handleDoubleClick(event, () => setWallpaper(child.name))
+            }
+            className="p-1 flex items-center gap-2 hover:cursor-pointer"
           >
             <img width="24" height="24" src={child.iconUrl} alt="folder-icon" />
             <span>{child.name}</span>
@@ -31,10 +37,12 @@ export default function FolderInternals({ app }: { app: AppType }) {
       case "pdf":
         return (
           <td
-            className="p-1 flex items-center gap-2"
-            onDoubleClick={() =>
-              handleOpenApp(childType === "pdf" ? "Pdf Viewer" : "")
+            onClick={(event: any) =>
+              handleDoubleClick(event, () =>
+                handleOpenApp(child.launcher ?? "")
+              )
             }
+            className="p-1 flex items-center gap-2 hover:cursor-pointer"
           >
             <img
               width="24"
@@ -49,10 +57,12 @@ export default function FolderInternals({ app }: { app: AppType }) {
       case "text":
         return (
           <td
-            className="p-1 flex items-center gap-2"
-            onDoubleClick={() =>
-              handleOpenApp(childType === "text" ? "Text Viewer" : "")
+            onClick={(event: any) =>
+              handleDoubleClick(event, () =>
+                handleOpenApp(child.launcher ?? "")
+              )
             }
+            className="p-1 flex items-center gap-2 hover:cursor-pointer"
           >
             <img
               width="24"
@@ -66,7 +76,7 @@ export default function FolderInternals({ app }: { app: AppType }) {
 
       case "folder":
         return (
-          <td className="p-1 flex items-center gap-2" onDoubleClick={() => {}}>
+          <td className="p-1 flex items-center gap-2" onClick={() => {}}>
             <img width="20" height="20" src={child.iconUrl} alt="folder-icon" />
             <span>{child.name}</span>
           </td>
@@ -85,9 +95,20 @@ export default function FolderInternals({ app }: { app: AppType }) {
               <th className="text-left p-2 border-r-[1px] transition-all duration-100 ease-out hover:bg-[rgba(255,255,255,0.2)] border-[rgba(255,255,255,0.2)]">
                 Name
               </th>
-              <th className="text-left p-2 border-r-[1px] transition-all duration-100 ease-out hover:bg-[rgba(255,255,255,0.2)] border-[rgba(255,255,255,0.2)]">
-                Date Modified
-              </th>
+              {app.name === "Recycle Bin" ? (
+                <>
+                  <th className="text-left p-2 border-r-[1px] transition-all duration-100 ease-out hover:bg-[rgba(255,255,255,0.2)] border-[rgba(255,255,255,0.2)]">
+                    Original Location
+                  </th>
+                  <th className="text-left p-2 border-r-[1px] transition-all duration-100 ease-out hover:bg-[rgba(255,255,255,0.2)] border-[rgba(255,255,255,0.2)]">
+                    Date Deleted
+                  </th>
+                </>
+              ) : (
+                <th className="text-left p-2 border-r-[1px] transition-all duration-100 ease-out hover:bg-[rgba(255,255,255,0.2)] border-[rgba(255,255,255,0.2)]">
+                  Date Modified
+                </th>
+              )}
               <th className="text-left p-2 border-r-[1px] transition-all duration-100 ease-out hover:bg-[rgba(255,255,255,0.2)] border-[rgba(255,255,255,0.2)]">
                 Type
               </th>
@@ -104,6 +125,9 @@ export default function FolderInternals({ app }: { app: AppType }) {
                   className="hover:bg-[rgba(255,255,255,0.2)] text-xs"
                 >
                   <HandleSubFileOrFolderIcons child={child} />
+                  {app.name === "Recycle Bin" && (
+                    <td className="p-1">{getFormattedDate()}</td>
+                  )}
                   <td className="p-1">{getFormattedDate()}</td>
                   <td className="p-1">{(child as FileType).type ?? ""}</td>
                   <td className="p-1">{"-"}</td>
