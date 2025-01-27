@@ -33,12 +33,12 @@ export default function CodeEditor({ app }: CodeEditorType) {
       )}
     >
       <div className="w-full h-full flex justify-center items-center bg-white">
-        <div className="w-[8%] h-full flex flex-col justify-start pt-5 p-2 gap-y-4 bg-[rgba(0,0,0,0.2)] items-center">
+        <div className="w-[7%] h-full flex flex-col justify-start pt-5 px-2 gap-y-4 border-r-[1px] border-[rgba(0,0,0,0.1)] items-center">
           <img
             width="30"
             height="30"
-            src="https://img.icons8.com/badges/48/copy.png"
-            alt="copy"
+            src="https://img.icons8.com/cotton/64/copy--v1.png"
+            alt="copy--v1"
           />
           <img
             width="30"
@@ -65,8 +65,8 @@ export default function CodeEditor({ app }: CodeEditorType) {
             alt="four-squares"
           />
         </div>
-        <div className="w-[92%] h-full">
-          <div className="h-10 flex justify-start border-b-[1px] shadow-md border-[rgba(0,0,0,0.1)] bg-[rgba(0,0,0,0.2)] items-center">
+        <div className="w-[93%] h-full">
+          <div className="h-10 flex justify-start shadow-md bg-[rgba(0,0,0,0.1)] items-center">
             {files.map(
               (
                 file: { name: string; code: string; language: string },

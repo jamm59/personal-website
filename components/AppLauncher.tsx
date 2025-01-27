@@ -22,7 +22,7 @@ export default function AppLauncher() {
           )}
           {app.name === "Start" && <StartWindow app={app} />}
           {app.name === "Terminal" && <CustomTerminal app={app} />}
-          {app.name === "vsCode" && <CodeEditor app={app} />}
+          {app.name === "VSCode" && <CodeEditor app={app} />}
           {app.name === "File Explorer" && <FileExplorer app={app} />}
           {/* {app.launcher === "Pdf Viewer" && <PDFEditor app={app} />} */}
           {app.launcher === "Text Viewer" && <TextEditor app={app} />}

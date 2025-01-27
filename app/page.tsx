@@ -5,7 +5,7 @@ import DesktopApps from "@/components/DesktopApps";
 import AppLauncher from "@/components/AppLauncher";
 import { useFileMangerStore } from "@/store/data";
 import { FileManagerType } from "..";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
   const wallpaperUrl = useFileMangerStore(
@@ -18,7 +18,7 @@ export default function Home() {
       }}
       className="relative h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-cover overflow-hidden"
     >
-      <LockScreen />
+      {/* <LockScreen /> */}
       <main className="w-full h-full relative z-10">
         <DesktopApps />
         <AppLauncher />
@@ -39,7 +39,7 @@ function LockScreen() {
         style={{
           transform: exit ? "translateY(-200%)" : "",
         }}
-        className="absolute p-1 bg-[rgba(0,0,0,0.9)] inset-0 z-[100] transition-all duration-500 ease-out"
+        className="absolute p-1 bg-[rgba(0,0,0,0.7)] inset-0 z-[100] transition-all duration-500 ease-out"
       >
         <div className="hover:cursor-pointer rounded-lg bg-[rgba(255,255,255,0.1)] text-gray-900 w-full h-full bg-cover flex justify-center items-center">
           <div className="w-[700px] aspect-video text-white flex flex-col justify-start items-center rounded-lg">

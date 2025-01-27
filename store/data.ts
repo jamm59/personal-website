@@ -88,7 +88,7 @@ export const useFileMangerStore = create<FileManagerType>((set) => ({
     },
     {
       ...template,
-      name: "vsCode",
+      name: "VSCode",
       isOnBothDeskTopAndTaskBar: true,
       iconUrl: "/icons/vscode.png",
     },

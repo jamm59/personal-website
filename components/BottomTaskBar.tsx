@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 
 export default function BottomTaskBar() {
+  // Global state
   const handleOpenApp = useFileMangerStore(
     (state: FileManagerType) => state.handleOpenApp
   );
@@ -22,10 +23,12 @@ export default function BottomTaskBar() {
     (state: FileManagerType) => state.apps
   );
 
+  // References and variables
   const appRef = useRef<any>([]);
+  const [showSidePopUp, setShowSidePopUp] = useState<boolean>(false);
+  const [showSocialsPopUp, setShowSocialsPopUp] = useState<boolean>(false);
 
-  const [sidePopUpIsOpen, setSidePopUpIsOpen] = useState<boolean>(false);
-
+  // methods
   const handleContextMenu = (event: any, idx: number) => {
     event.preventDefault();
     if (appRef.current[idx]) {
@@ -171,20 +174,30 @@ export default function BottomTaskBar() {
           </div>
         ))}
       <div className="absolute sm:hidden right-0 px-4 text-black dark:text-white py-3 w-[15rem] h-full flex justify-center items-center">
-        <button
-          onClick={() => setSidePopUpIsOpen(!sidePopUpIsOpen)}
-          className="min-w-fit p-2 gap-x-2 w-h-full w-1/2 flex justify-center items-center"
-        >
-          <SideWindowPopUp sidePopUpIsOpen={sidePopUpIsOpen} />
-          <div className="flex justify-center items-center">
+        <div className="min-w-fit p-2 gap-x-2 w-h-full w-1/2 flex justify-center items-center">
+          <SideWindowPopUp showSidePopUp={showSidePopUp} />
+          <SocialsPopUp showSocialsPopUp={showSocialsPopUp} />
+          <button
+            onClick={() => {
+              setShowSocialsPopUp(!showSocialsPopUp);
+              setShowSidePopUp(false);
+            }}
+            className="flex justify-center items-center hover:cursor-pointer"
+          >
             <img
               width="13"
               height="13"
               src="https://img.icons8.com/ios-filled/50/FFFFFF/collapse-arrow.png"
               alt="collapse-arrow"
             />
-          </div>
-          <div className="rounded-md transition-all duration-100 hover:bg-[rgba(255,255,255,0.1)] flex gap-x-2 p-2">
+          </button>
+          <button
+            onClick={() => {
+              setShowSocialsPopUp(false);
+              setShowSidePopUp(!showSidePopUp);
+            }}
+            className="rounded-md transition-all duration-100 hover:bg-[rgba(255,255,255,0.1)] flex gap-x-2 p-2"
+          >
             <img
               width="20"
               height="20"
@@ -203,8 +216,8 @@ export default function BottomTaskBar() {
               src="https://img.icons8.com/fluency-systems-regular/50/FFFFFF/medium-battery.png"
               alt="medium-battery"
             />
-          </div>
-        </button>
+          </button>
+        </div>
         <button className="min-w-fit w-h-full w-1/2 flex flex-col justify-center items-end font-mono text-xs">
           <span>
             {currentTime.getHours() < 10
@@ -222,13 +235,57 @@ export default function BottomTaskBar() {
   );
 }
 
-const SideWindowPopUp = ({ sidePopUpIsOpen }: { sidePopUpIsOpen: boolean }) => {
+const SocialsPopUp = ({ showSocialsPopUp }: { showSocialsPopUp: boolean }) => {
   return (
     <div
       style={{
-        top: sidePopUpIsOpen ? "-360px" : "360px",
+        top: showSocialsPopUp ? "-65px" : "65px",
       }}
-      className="transition-all duration-200 ease-in-out bg-[rgba(0,0,0,0.6)] w-[20rem] left-[-90px] rounded-md min-h-fit h-[350px] overflow-hidden absolute text-sm p-2 flex flex-col justify-start items-center"
+      className="transition-all duration-200 ease-in-out bg-[rgba(0,0,0,1)] w-[10rem] left-[-90px] rounded-md min-h-fit h-[50px] overflow-hidden absolute text-sm p-4 flex justify-between items-center"
+    >
+      <a href="">
+        <img
+          width="24"
+          height="24"
+          src="https://img.icons8.com/ios-filled/FFFFFF/24/github.png"
+          alt="github"
+        />
+      </a>
+      <a href="">
+        <img
+          width="24"
+          height="24"
+          src="https://img.icons8.com/color/FFFFFF/48/linkedin.png"
+          alt="linkedin"
+        />
+      </a>
+      <a href="">
+        <img
+          width="24"
+          height="24"
+          src="https://img.icons8.com/ios-filled/FFFFFF/50/instagram-new--v1.png"
+          alt="instagram-new--v1"
+        />
+      </a>
+      <a href="mailto:jammoben@gmail.com">
+        <img
+          width="24"
+          height="24"
+          src="https://img.icons8.com/ios-filled/FFFFFF/50/apple-mail.png"
+          alt="apple-mail"
+        />
+      </a>
+    </div>
+  );
+};
+
+const SideWindowPopUp = ({ showSidePopUp }: { showSidePopUp: boolean }) => {
+  return (
+    <div
+      style={{
+        top: showSidePopUp ? "-360px" : "360px",
+      }}
+      className="transition-all duration-200 ease-in-out bg-[rgba(0,0,0,1)] w-[20rem] left-[-90px] rounded-md min-h-fit h-[350px] overflow-hidden absolute text-sm p-2 flex flex-col justify-start items-center"
     >
       <div className="grid border-b-[1px] border-[rgba(255,255,255,0.1)] pb-2 grid-cols-3 grid-row-2 gap-2 py-4 h-1/2">
         <div

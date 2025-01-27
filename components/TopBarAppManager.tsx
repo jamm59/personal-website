@@ -131,8 +131,8 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
               className="h-full flex justify-center items-center w-12 hover:bg-[rgba(0,0,0,0.1)] transition-all duration-100"
             >
               <img
-                width="15"
-                height="15"
+                width="12"
+                height="12"
                 src="https://img.icons8.com/fluency-systems-regular/50/000000/horizontal-line.png"
                 alt="horizontal-line"
               />
@@ -142,8 +142,8 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
               className="h-full flex justify-center items-center w-12 hover:bg-[rgba(255,255,255,0.2)] transition-all duration-100"
             >
               <img
-                width="15"
-                height="15"
+                width="12"
+                height="12"
                 src="https://img.icons8.com/fluency-systems-regular/50/000000/maximize-button.png"
                 alt="maximize-button"
               />
@@ -153,8 +153,8 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
               className="h-full flex justify-center items-center w-12 hover:bg-red-500 transition-all duration-100"
             >
               <img
-                width="15"
-                height="15"
+                width="12"
+                height="12"
                 src="https://img.icons8.com/fluency-systems-regular/50/000000/delete-sign--v1.png"
                 alt="delete-sign--v1"
               />
