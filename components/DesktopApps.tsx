@@ -81,15 +81,15 @@ export default function DesktopApps() {
         .map((app: AppType, idx: number) => {
           return (
             <button
-              // onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) =>
-              //   handleMouseDown(e, desktopProgramsRef.current.get(idx))
-              // }
-              // onMouseMove={(e: React.MouseEvent<HTMLButtonElement>) =>
-              //   handleMouseMove(e, desktopProgramsRef.current.get(idx))
-              // }
-              // onMouseUp={(e: React.MouseEvent<HTMLButtonElement>) =>
-              //   handleMouseUp(e, desktopProgramsRef.current.get(idx))
-              // }
+              onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) =>
+                handleMouseDown(e, desktopProgramsRef.current.get(idx))
+              }
+              onMouseMove={(e: React.MouseEvent<HTMLButtonElement>) =>
+                handleMouseMove(e, desktopProgramsRef.current.get(idx))
+              }
+              onMouseUp={(e: React.MouseEvent<HTMLButtonElement>) =>
+                handleMouseUp(e, desktopProgramsRef.current.get(idx))
+              }
               key={idx}
               ref={(r: HTMLButtonElement | null) => {
                 // console.log(app.name, idx);
@@ -108,7 +108,7 @@ export default function DesktopApps() {
               style={{
                 top: `${idx < 1 ? 7 : 7 * idx}rem`,
               }}
-              className="duration-75 transition-all ease-linear group hover:bg-[rgb(255,255,255,0.1)] p-1 rounded-md flex justify-center items-center flex-col"
+              className="group hover:bg-[rgb(255,255,255,0.1)] p-1 rounded-md flex justify-center items-center flex-col"
             >
               <Image
                 alt="folder icon"
