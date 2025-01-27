@@ -18,7 +18,7 @@ export default function Home() {
       }}
       className="relative h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-cover overflow-hidden"
     >
-      {/* <LockScreen /> */}
+      <LockScreen />
       <main className="w-full h-full relative z-10">
         <DesktopApps />
         <AppLauncher />
