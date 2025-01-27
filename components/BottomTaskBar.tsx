@@ -2,6 +2,7 @@ import { useFileMangerStore } from "@/store/data";
 import { FileManagerType, AppType } from "..";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 
 export default function BottomTaskBar() {
   // Global state
@@ -55,12 +56,14 @@ export default function BottomTaskBar() {
         appRef.current[i].classList.remove("flex");
       }
     }
+    if (showSidePopUp) setShowSidePopUp(false);
+    if (showSocialsPopUp) setShowSocialsPopUp(false);
   };
 
   useEffect(() => {
     document.addEventListener("click", hideTaskBarContextMenu);
     return () => document.removeEventListener("click", hideTaskBarContextMenu);
-  }, []);
+  }, [showSidePopUp, showSocialsPopUp]);
 
   const excludedApps: string[] = ["Start", "Task View"];
 
@@ -243,38 +246,50 @@ const SocialsPopUp = ({ showSocialsPopUp }: { showSocialsPopUp: boolean }) => {
       }}
       className="transition-all duration-200 ease-in-out bg-[rgba(0,0,0,1)] w-[10rem] left-[-90px] rounded-md min-h-fit h-[50px] overflow-hidden absolute text-sm p-4 flex justify-between items-center"
     >
-      <a href="">
+      <Link
+        className="hover:translate-y-[-0.25rem] transition-all duration-200 ease-in-out"
+        href="https://github.com/jamm59"
+      >
         <img
           width="24"
           height="24"
           src="https://img.icons8.com/ios-filled/FFFFFF/24/github.png"
           alt="github"
         />
-      </a>
-      <a href="">
+      </Link>
+      <Link
+        className="hover:translate-y-[-0.25rem] transition-all duration-200 ease-in-out"
+        href="https://www.linkedin.com/in/moben-jam-835509232/?originalSubdomain=uk"
+      >
         <img
           width="24"
           height="24"
           src="https://img.icons8.com/color/FFFFFF/48/linkedin.png"
           alt="linkedin"
         />
-      </a>
-      <a href="">
+      </Link>
+      <Link
+        className="hover:translate-y-[-0.25rem] transition-all duration-200 ease-in-out"
+        href="https://www.instagram.com/mja.m5/"
+      >
         <img
           width="24"
           height="24"
           src="https://img.icons8.com/ios-filled/FFFFFF/50/instagram-new--v1.png"
           alt="instagram-new--v1"
         />
-      </a>
-      <a href="mailto:jammoben@gmail.com">
+      </Link>
+      <Link
+        className="hover:translate-y-[-0.25rem] transition-all duration-200 ease-in-out"
+        href="mailto:jammoben@gmail.com"
+      >
         <img
           width="24"
           height="24"
           src="https://img.icons8.com/ios-filled/FFFFFF/50/apple-mail.png"
           alt="apple-mail"
         />
-      </a>
+      </Link>
     </div>
   );
 };

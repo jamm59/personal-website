@@ -14,7 +14,9 @@ interface TopBarAppManagerType {
 const TopBarAppManager = (props: TopBarAppManagerType) => {
   const { app, children, titleColor, bgColor, AppIcon } = props;
   // constants and variables
-  const backgroundColor: string = "rgba(255,255,255,0.7)";
+  const [backgroundColor, setBackgroundColor] = useState<string>(
+    "rgba(255,255,255,0.8)"
+  );
   const customWindowWidth: string = "80%";
 
   // Global state
@@ -100,10 +102,12 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
                 backgroundColor: app.canAddPages ? bgColor : "",
                 color: app.canAddPages ? titleColor : "black",
               }}
-              className="py-1 px-2 select-none font-sans text-sm font-semibold w-[35%] rounded-t-md h-full flex justify-between pl-2 items-center"
+              className="py-1 px-2 select-none font-sans font-semibold w-[35%] rounded-t-md h-full flex justify-between pl-2 items-center"
             >
               <AppIcon />
-              <span className="mr-auto ml-2">{app.name}</span>
+              <span className="mr-auto ml-2 text-gray-900 text-base">
+                {app.name}
+              </span>
               {app.canAddPages && (
                 <img
                   width="12"
@@ -131,8 +135,8 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
               className="h-full flex justify-center items-center w-12 hover:bg-[rgba(0,0,0,0.1)] transition-all duration-100"
             >
               <img
-                width="12"
-                height="12"
+                width="14"
+                height="14"
                 src="https://img.icons8.com/fluency-systems-regular/50/000000/horizontal-line.png"
                 alt="horizontal-line"
               />
@@ -142,8 +146,8 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
               className="h-full flex justify-center items-center w-12 hover:bg-[rgba(255,255,255,0.2)] transition-all duration-100"
             >
               <img
-                width="12"
-                height="12"
+                width="14"
+                height="14"
                 src="https://img.icons8.com/fluency-systems-regular/50/000000/maximize-button.png"
                 alt="maximize-button"
               />
@@ -153,8 +157,8 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
               className="h-full flex justify-center items-center w-12 hover:bg-red-500 transition-all duration-100"
             >
               <img
-                width="12"
-                height="12"
+                width="14"
+                height="14"
                 src="https://img.icons8.com/fluency-systems-regular/50/000000/delete-sign--v1.png"
                 alt="delete-sign--v1"
               />
