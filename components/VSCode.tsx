@@ -22,6 +22,7 @@ export default function CodeEditor({ app }: CodeEditorType) {
     <TopBarAppManager
       app={app}
       titleColor="white"
+      mainWrapperBackgroundColor={"white"}
       bgColor={bgColor}
       AppIcon={() => (
         <img

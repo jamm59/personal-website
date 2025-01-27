@@ -7,15 +7,23 @@ import { AppType, FileManagerType } from "..";
 interface TopBarAppManagerType {
   app: AppType;
   children?: React.ReactNode;
+  mainWrapperBackgroundColor?: string | null;
   titleColor: string;
   bgColor: string;
   AppIcon: any;
 }
 const TopBarAppManager = (props: TopBarAppManagerType) => {
-  const { app, children, titleColor, bgColor, AppIcon } = props;
+  const {
+    app,
+    children,
+    titleColor,
+    bgColor,
+    AppIcon,
+    mainWrapperBackgroundColor,
+  } = props;
   // constants and variables
   const [backgroundColor, setBackgroundColor] = useState<string>(
-    "rgba(255,255,255,0.8)"
+    mainWrapperBackgroundColor ?? "rgba(255,255,255,0.8)"
   );
   const customWindowWidth: string = "80%";
 
@@ -102,12 +110,10 @@ const TopBarAppManager = (props: TopBarAppManagerType) => {
                 backgroundColor: app.canAddPages ? bgColor : "",
                 color: app.canAddPages ? titleColor : "black",
               }}
-              className="py-1 px-2 select-none font-sans font-semibold w-[35%] rounded-t-md h-full flex justify-between pl-2 items-center"
+              className="py-1 px-2 select-none font-sans text-sm font-semibold w-[35%] rounded-t-md h-full flex justify-between pl-2 items-center"
             >
               <AppIcon />
-              <span className="mr-auto ml-2 text-gray-900 text-base">
-                {app.name}
-              </span>
+              <span className="mr-auto ml-2">{app.name}</span>
               {app.canAddPages && (
                 <img
                   width="12"

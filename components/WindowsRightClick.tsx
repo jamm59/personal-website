@@ -107,6 +107,7 @@ const WindowsRightClick = () => {
       {
         name: "Refresh",
         command: "",
+        callback: () => window.location.reload(),
         icon: (
           <img
             width="24"
